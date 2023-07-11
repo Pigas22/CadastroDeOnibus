@@ -1,3 +1,2 @@
-minecraft 512 600 30 
-Usuario_de_K9 700 800 80 
-airton 500 321 60 
+minecraft 512 VIX 38 
+Cleintin 700 DM 51 

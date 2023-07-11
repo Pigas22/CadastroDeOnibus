@@ -106,6 +106,8 @@ def consulta_espec(matriz, local_linha='', linha=False):
 def inserir(matriz, motorista, linha, destino, passageiros):
   if ' ' in motorista:
     motorista = '_'.join(motorista.split())
+
+  motorista.title()
     
   linha = [motorista, linha, destino, passageiros]
   matriz.append(linha)

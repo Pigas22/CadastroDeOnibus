@@ -1,7 +1,7 @@
 import PySimpleGUI as sg
 import backend
 
-# layout 1 == botoes
+
 sg.theme('DarkBlue')
 op_menuBar = ['Menu', 'Menu Principal', 'Sair', 'Navegar', 'Inserir', 'Ver Tudo', 'Consulta Específica', 'Deletar', 'Ajuda', 'Sobre...']
 op_menuPrincpal = ['INSERIR', 'DELETAR', 'ALTERAR', 'VER TUDO', 'CONSULTA ESPECÍFICA']
@@ -167,7 +167,7 @@ def tela_deletar(matriz):
               background_color='SlateBlue', 
               text_color='Black')
               ],
-    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIROS'], justification='left', key='tabela_atual')],
+    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIROS'], justification='left', key='tabela_atual', enable_click_events=True)],
     [sg.Text('DIGITE O ID DO REGISTRO QUE DESEJA DELETAR:',  background_color='SlateBlue', text_color='Black')],
     [sg.Input(key='ID', size=(10,1)), sg.Button('CONFIRMAR')]
   ]
@@ -176,10 +176,11 @@ def tela_deletar(matriz):
   
   while True:
     evento, valor = tela_deletar.read()
+
     if evento == sg.WINDOW_CLOSED:
       tela_deletar.close()
       break
-    
+
     elif evento in op_menuBar:
       tela_deletar.close()
       if evento == 'Menu Principal':
@@ -203,6 +204,11 @@ def tela_deletar(matriz):
       elif evento == 'Sobre...':
         print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
 
+    elif evento[0] == 'tabela_atual':
+      selected_id = tela_deletar['ID']
+      selected_id.update(evento[2][0])
+      valor['ID'] = evento[2][0]
+
     elif evento == 'CONFIRMAR':
       id_do_registro = int(valor['ID'])
 
@@ -211,6 +217,11 @@ def tela_deletar(matriz):
 
       tabela = tela_deletar['tabela_atual']
       tabela.update(values=tabela_comId)
+
+      sg.popup_auto_close('Operação bem-sucedida', 'Valor deletado com sucesso! ', background_color='SlateBlue', text_color='Black', font='Arial 12')
+      resp_delete = tela_deletar['ID']
+      resp_delete.update('')
+
 
 
 def tela_consulta(matriz):
@@ -277,12 +288,12 @@ def tela_alterar(matriz):
 
   col1 = [
     [sg.Text('Informe a linha:', background_color='SlateBlue', text_color='Black')],
-    [sg.InputCombo(values=tamanho_matriz, size=(9, 1), key='ID_linha')]
+    [sg.InputCombo(values=tamanho_matriz, size=(10, 1), key='ID_linha')]
   ]
 
   col2 = [
     [sg.Text('Informe a coluna:', background_color='SlateBlue', text_color='Black')],
-    [sg.InputCombo(values=lista_colunas, size=(9, 1), key='ID_coluna')]
+    [sg.InputCombo(values=lista_colunas, size=(10, 1), key='ID_coluna')]
   ]
   
 
@@ -356,3 +367,7 @@ def tela_alterar(matriz):
       tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
       tabela = tela_alterar['tabela']
       tabela.update(values=tabela_comId)
+      
+      sg.popup_auto_close('Operação bem-sucedida', 'Valor alterado com sucesso! ', background_color='SlateBlue', text_color='Black', font='Arial 12')
+      resposta = tela_alterar['NOVO_DADO']
+      resposta.update('')
