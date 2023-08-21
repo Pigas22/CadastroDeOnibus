@@ -70,7 +70,7 @@ def tela_verTudo(matriz):
           background_color='SlateBlue', 
           text_color='Black')
           ],
-    [sg.Table(values = matriz, headings=[ 'MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIROS'], justification='left')]
+    [sg.Table(values = matriz, headings=[ 'MOTORISTA', 'LINHA ÒNIBUS', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left')]
   ]
 
   tela_verTudo = sg.Window('VER TUDO' , layout_verTudo, background_color='SlateBlue')
@@ -111,10 +111,10 @@ def tela_inserir(matriz):
               background_color='SlateBlue', 
               text_color='Black')
               ],
-    [sg.Text('MOTORISTA:', size = (11, 1), background_color='SlateBlue'), sg.Input(key='motorista', background_color='White', text_color='Black')],
-    [sg.Text('LINHA ÔNI:', size=(11,1), background_color='SlateBlue'), sg.Input(key='linha', background_color='White', text_color='Black')],
-    [sg.Text('DESTINO:', size=(11, 1), background_color='SlateBlue'), sg.Input(key='destino',background_color='white', text_color='black')],
-    [sg.Text('PASSAGEIROS:', size=(11, 1), background_color='SlateBlue'), sg.Input(key='PASSAGEIROS', background_color='white', text_color='Black')],
+    [sg.Text('MOTORISTA:', size = (15, 1), background_color='SlateBlue'), sg.Input(key='motorista', background_color='White', text_color='Black')],
+    [sg.Text('LINHA ÔNIBUS:', size=(15,1), background_color='SlateBlue'), sg.Input(key='linha', background_color='White', text_color='Black')],
+    [sg.Text('DESTINO:', size=(15, 1), background_color='SlateBlue'), sg.Input(key='destino',background_color='white', text_color='black')],
+    [sg.Text('N° de PASSAGEIROS:', size=(15, 1), background_color='SlateBlue'), sg.Input(key='N° de PASSAGEIROS', background_color='white', text_color='Black')],
     [sg.Button('Cadastrar')]
   ]
   
@@ -129,9 +129,9 @@ def tela_inserir(matriz):
       motorista = valor['motorista']    
       linha = valor['linha']
       destino = valor['destino']
-      passageiros = valor['PASSAGEIROS']
+      quant_passageiros = valor['N° de PASSAGEIROS']
 
-      backend.inserir(matriz, motorista, linha, destino, passageiros)
+      backend.inserir(matriz, motorista, linha, destino, quant_passageiros)
 
       tela_inserir.close()
 
@@ -167,7 +167,7 @@ def tela_deletar(matriz):
               background_color='SlateBlue', 
               text_color='Black')
               ],
-    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIROS'], justification='left', key='tabela_atual', enable_click_events=True)],
+    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA ÔNIBUS', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', key='tabela_atual', enable_click_events=True)],
     [sg.Text('DIGITE O ID DO REGISTRO QUE DESEJA DELETAR:',  background_color='SlateBlue', text_color='Black')],
     [sg.Input(key='ID', size=(10,1)), sg.Button('CONFIRMAR')]
   ]
@@ -235,7 +235,7 @@ def tela_consulta(matriz):
               ],
     [sg.Text('DIGITE O ID DO REGISTRO QUE DESEJA CONSULTAR:',  background_color='SlateBlue', text_color='Black')],
     [sg.Input(key='ID', size=(10, 1)), sg.Button('CONFIRMAR')],
-   [sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIRO'], justification='left')]
+   [sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left')]
    ]
   
    tela_consulta = sg.Window('CONSULTA ESPECÍFICA', layout_consulta, background_color='SlateBlue', element_justification='c')
@@ -297,7 +297,7 @@ def tela_alterar(matriz):
   ]
   
 
-  tabela_teste = [[sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'PASSAGEIRO'], justification='left', key='tabela', enable_click_events=True)]]
+  tabela_teste = [[sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', key='tabela', enable_click_events=True)]]
 
   frame_teste = [[sg.Frame('Informações',  [
     [sg.Column(col1, element_justification='c', background_color='SlateBlue'), sg.VSep(), sg.Column(col2, element_justification='c', background_color='SlateBlue')],

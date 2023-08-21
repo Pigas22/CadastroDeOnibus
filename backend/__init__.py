@@ -24,7 +24,7 @@ def inicializar():
   
   if linhas:
     for i in range(0, len(linhas)):
-      linhas_espec = linhas[i].split() # linhas_espec = [sas, 700, 700, 700]
+      linhas_espec = linhas[i].split() # linhas_espec = [motoristaN, linhaX, destinoY, quantidade_pass.Z]
       linha_inicial = []
       
       for itens in linhas_espec:
@@ -103,13 +103,13 @@ def consulta_espec(matriz, local_linha='', linha=False):
     return dados
 
 
-def inserir(matriz, motorista, linha, destino, passageiros):
+def inserir(matriz, motorista, linha, destino, quant_passageiros):
   if ' ' in motorista:
     motorista = '_'.join(motorista.split())
 
   motorista.title()
     
-  linha = [motorista, linha, destino, passageiros]
+  linha = [motorista, linha, destino, quant_passageiros]
   matriz.append(linha)
 
 
