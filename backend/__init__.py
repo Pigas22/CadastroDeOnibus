@@ -28,10 +28,15 @@ def inicializar():
       linha_inicial = []
       
       for itens in linhas_espec:
+        if '_' in itens:
+          quantDe_ = itens.count('_')
+          for underlines in range(0, quantDe_):
+            itens = itens.replace('_', ' ')
+
         try:
           linha_inicial.append(int(itens))
           
-        except ValueError:
+        except ValueError:         
           linha_inicial.append(itens)
       
       matriz.append(linha_inicial)
@@ -40,6 +45,13 @@ def inicializar():
 
 
 def salvar(matriz):
+  for linha in matriz:
+    if ' ' in linha[0]:
+      linha[0] = '_'.join(linha[0].split())
+  
+    if ' ' in linha[2]:
+      linha[2] = '_'.join(linha[2].split())
+    
   # Colocar no final do código, para salvar as informações. 
   with open('backend/matriz.txt', 'w') as arquivo:
     for linhas in matriz:
@@ -104,10 +116,13 @@ def consulta_espec(matriz, local_linha='', linha=False):
 
 
 def inserir(matriz, motorista, linha, destino, quant_passageiros):
-  if ' ' in motorista:
+  """if ' ' in motorista:
     motorista = '_'.join(motorista.split())
 
-  motorista.title()
+  if ' ' in destino:
+    destino = '_'.join(destino.split())"""
+
+  motorista = motorista.title()
     
   linha = [motorista, linha, destino, quant_passageiros]
   matriz.append(linha)
