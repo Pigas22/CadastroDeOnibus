@@ -16,7 +16,7 @@ colunas_inversa = {
 
 def inicializar():
   # colocar assim que abrir o app, para puxar as informações do arquivo.    
-  with open('backend/matriz.txt', 'rt') as arquivo:
+  with open('backend/BD_Dados/Usuario01_Dados.txt', 'rt') as arquivo:
     linhas = arquivo.readlines()
   arquivo.close()
 
@@ -53,7 +53,7 @@ def salvar(matriz):
       linha[2] = '_'.join(linha[2].split())
     
   # Colocar no final do código, para salvar as informações. 
-  with open('backend/matriz.txt', 'w') as arquivo:
+  with open('backend/BD_Dados/Usuario01_Dados.txt', 'w') as arquivo:
     for linhas in matriz:
       for itens in linhas:
         arquivo.write(f'{itens} ')
@@ -137,3 +137,90 @@ def alterar_dado(matriz, local_linha, local_coluna, novo_dado):
     novo_dado = '_'.join(novo_dado.split())
     
   matriz[local_linha][local_coluna] = novo_dado
+
+
+def verificar_email(email): # Fazer tratamento de erro
+  with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_emails:
+    linhas = arquivo_emails.readlines()
+  arquivo_emails.close()
+  
+  if linhas:
+    for conta in linhas:
+      if email in conta:
+        return False
+
+    return True 
+    
+  else:
+    return True
+
+
+def verificar_senha(senha_Principal, senha_Confirmacao): # Fazer tratamento de erro 
+  validacoes = 0
+  numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
+  pontos = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',',  '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~']
+  
+  if senha_Principal == senha_Confirmacao:
+    validacoes += 1
+    
+    for numero in numeros:
+      if numero in senha_Principal:
+        validacoes += 1
+        break
+
+    for ponto in pontos:
+      if ponto in senha_Principal:
+        validacoes += 1
+        break
+
+  if validacoes == 3:
+    return True
+
+  else:
+    return False
+
+
+def salvar_contas(nome_Completo, email, senha_Principal):
+  nome_Completo = '_'.join(nome_Completo.split())
+  senha_Encriptada = encriptador_senhas(senha_Principal)
+  
+  with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_Contas:
+    linhas = arquivo_Contas.readlines()
+  
+  with open('backend/BD_Contas/Todas_Contas.txt', 'a') as arquivo_Contas2:
+    if linhas:
+      arquivo_Contas2.write(f'\n{nome_Completo} {email} {senha_Encriptada}')
+
+    else:
+      arquivo_Contas2.write(f'{nome_Completo} {email} {senha_Encriptada}')
+
+  arquivo_Contas.close()
+  arquivo_Contas2.close()
+
+
+def encriptador_senhas(senha):
+  # a ser desenvolvido
+  encriptacao = {
+    # conter todas as caracteres possiveis para fazer a encriptação
+    '1': '##', '2': '#0', '3': '#1', '4': '#2', '5': '#3', '6': '#4', '7': '#5',
+    '8': '#6', '9': '#7', '0': '#8', ' ': '#9', '!': '0#', '"': '00', '#': '01',
+    '$': '02', '%': '03', '&': '04', "'": '05', '(': '06', ')': '07', '*': '08',
+    '+': '09', ',': '1#', '-': '10', '.': '11', '/': '12', ':': '13', ';': '14',
+    '<': '15', '=': '16', '>': '17', '?': '18', '@': '19', '[': '2#', ']': '20',
+    '^': '21', '_': '22', '`': '23', '{': '24', '|': '25', '}': '26', '~': '27',
+    'a': '28', 'b': '29', 'c': '3#', 'd': '30', 'e': '31', 'f': '32', 'g': '33',
+    'h': '34', 'i': '35', 'j': '36', 'k': '37', 'l': '38', 'm': '39', 'n': '4#',
+    'o': '40', 'p': '41', 'q': '42', 'r': '43', 's': '44', 't': '45', 'u': '46',
+    'v': '47', 'w': '48', 'x': '49', 'y': '5#', 'z': '50', 'A': '51', 'B': '52',
+    'C': '53', 'D': '54', 'E': '55', 'F': '56', 'G': '57', 'H': '58', 'I': '59',
+    'J': '6#', 'K': '60', 'L': '61', 'M': '62', 'N': '63', 'O': '64', 'P': '65',
+    'Q': '66', 'R': '67', 'S': '68', 'T': '69', 'U': '7#', 'V': '70', 'W': '71',
+    'X': '72', 'Y': '73', 'Z': '74'
+  }
+
+  senha_Encriptada = ''
+  for letra in senha:
+    senha_Encriptada += encriptacao[letra]
+ 
+  return senha_Encriptada
+  

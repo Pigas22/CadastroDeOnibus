@@ -1,4 +1,5 @@
 import interface
 
 
-interface.tela_inicial()
+interface.tela_cadastro()
+# interface.tela_inicial()

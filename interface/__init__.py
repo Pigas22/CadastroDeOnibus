@@ -6,6 +6,90 @@ sg.theme('DarkBlue')
 op_menuBar = ['Menu', 'Menu Principal', 'Sair', 'Navegar', 'Inserir', 'Ver Tudo', 'Consulta Específica', 'Deletar', 'Ajuda', 'Sobre...']
 op_menuPrincpal = ['INSERIR', 'DELETAR', 'ALTERAR', 'VER TUDO', 'CONSULTA ESPECÍFICA']
 
+
+def tela_cadastro():   
+  validacoes = 0
+  sair = ''
+  
+  col1 = [
+    [sg.Text('| Nome Completo: *', background_color='SlateBlue')],
+    [sg.Input(key='Nome_Completo', size=(25, 1))],
+    [sg.Text('| Digite sua senha: *', background_color='SlateBlue')],
+    [sg.Input(key='Senha_Principal', size=(25, 1), password_char='*')]
+  ]
+
+  col2 = [
+    [sg.Text('| Informe seu Email: *', background_color='SlateBlue')],
+    [sg.Input(key='Email', size=(25, 1))],
+    [sg.Text('| Confirme sua senha: *', background_color='SlateBlue')],
+    [sg.Input(key='Senha_Confirmação', size=(25, 1), password_char='*')]
+  ]
+  
+  
+  layout = [
+    [sg.Menu([['Menu', ['Login', 'Sair']], ['Ajuda', ['Sobre...']]])],
+    [sg.Text(' Cadastre-se ', font='ARIAL 20', background_color='White', text_color='Black')],
+    [sg.Column(col1, background_color='SlateBlue'), sg.Column(col2, background_color='SlateBlue')],
+    [sg.Frame('Obs: ', [[sg.Text('Todos os campos com Asterisco (*) devem ser preenchidos.', background_color='SlateBlue')]], background_color='SlateBlue')],
+    [sg.Button('Limpar Dados'), sg.Button('Salvar')]
+  ]
+
+  tela_cadastro = sg.Window('Cadastro', layout, background_color='SlateBlue', element_justification='c', size = (520, 270))
+
+  while True:
+    evento, valor = tela_cadastro.read()
+    if evento == sg.WINDOW_CLOSED or sair == 'Sair':
+      break
+
+    if evento == 'Login':
+      tela_cadastro.close()
+      tela_login()
+
+    if evento == 'Sair':
+      sair = 'Sair'
+
+    if evento == 'Salvar':
+      nome_Completo = valor['Nome_Completo'] 
+      email = valor['Email']
+      senha_Principal = valor['Senha_Principal']
+      senha_Confirmacao = valor['Senha_Confirmação']
+
+      email_valido = backend.verificar_email(email)
+      senha_valida = backend.verificar_senha(senha_Principal, senha_Confirmacao)
+
+      if senha_valida and email_valido: # varifica a senha e o email se estao devidamente corretos
+        validacoes += 2
+
+      elif not email_valido:
+        # erro de email
+        print('Email inválido') # Melhorar esse tratamento de erro
+      
+      elif not senha_valida:
+        # erro de senha
+        print('Senha inválida') # Melhorar esse tratamento de erro
+
+      if validacoes == 2:
+        backend.salvar_contas(nome_Completo, email, senha_Principal)
+        sg.popup('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.', no_titlebar=True, background_color=  'SlateBlue')
+        
+        tela_cadastro.close()
+        tela_inicial()
+
+    if evento == 'Limpar Dados':
+      print(1+2)
+
+
+def tela_login():
+  # Não terminado 
+  layout = [
+    [sg.Text('LOGIN')],
+    [sg.Text('Nome ou Email:')],
+    [sg.Input()],
+    [sg.Text('Senha:')],
+    [sg.Input()]
+  ]
+
+
 def tela_inicial():
   sair = ''
   matriz = backend.inicializar()
@@ -70,7 +154,7 @@ def tela_verTudo(matriz):
           background_color='SlateBlue', 
           text_color='Black')
           ],
-    [sg.Table(values = matriz, headings=[ 'MOTORISTA', 'LINHA ÒNIBUS', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left')]
+    [sg.Table(values = matriz, headings=[ 'MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left')]
   ]
 
   tela_verTudo = sg.Window('VER TUDO' , layout_verTudo, background_color='SlateBlue')
@@ -167,7 +251,7 @@ def tela_deletar(matriz):
               background_color='SlateBlue', 
               text_color='Black')
               ],
-    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA ÔNIBUS', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', key='tabela_atual', enable_click_events=True)],
+    [sg.Table(values = tabela_comId , headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', key='tabela_atual', enable_click_events=True)],
     [sg.Text('DIGITE O ID DO REGISTRO QUE DESEJA DELETAR:',  background_color='SlateBlue', text_color='Black')],
     [sg.Input(key='ID', size=(10,1)), sg.Button('CONFIRMAR')]
   ]
@@ -221,7 +305,6 @@ def tela_deletar(matriz):
       sg.popup_auto_close('Operação bem-sucedida', 'Valor deletado com sucesso! ', background_color='SlateBlue', text_color='Black', font='Arial 12')
       resp_delete = tela_deletar['ID']
       resp_delete.update('')
-
 
 
 def tela_consulta(matriz):
@@ -344,7 +427,7 @@ def tela_alterar(matriz):
         tela_deletar(matriz)
 
       elif evento == 'Sobre...':
-        print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
+        sg.popup('Feito por:', 'Samuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
       
     elif evento[0] == 'tabela':
       tabela = tela_alterar['ID_linha']
@@ -371,3 +454,7 @@ def tela_alterar(matriz):
       sg.popup_auto_close('Operação bem-sucedida', 'Valor alterado com sucesso! ', background_color='SlateBlue', text_color='Black', font='Arial 12')
       resposta = tela_alterar['NOVO_DADO']
       resposta.update('')
+
+
+def tela_creditos():
+  print()
