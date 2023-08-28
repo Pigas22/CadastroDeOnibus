@@ -28,20 +28,22 @@ def tela_cadastro():
   
   layout = [
     [sg.Menu([['Menu', ['Login', 'Sair']], ['Ajuda', ['Sobre...']]])],
-    [sg.Text(' Cadastre-se ', font='ARIAL 20', background_color='White', text_color='Black')],
+    [sg.Text('Login...', size=(40, 1), justification='r', background_color='Slate Blue', enable_events=True, font='Arial 15 underline')],
+    [sg.Image(r'ImageUser.png', background_color='Slate Blue')],
     [sg.Column(col1, background_color='SlateBlue'), sg.Column(col2, background_color='SlateBlue')],
     [sg.Frame('Obs: ', [[sg.Text('Todos os campos com Asterisco (*) devem ser preenchidos.', background_color='SlateBlue')]], background_color='SlateBlue')],
     [sg.Button('Limpar Dados'), sg.Button('Salvar')]
   ]
 
-  tela_cadastro = sg.Window('Cadastro', layout, background_color='SlateBlue', element_justification='c', size = (520, 270))
+  tela_cadastro = sg.Window('Cadastro', layout, background_color='SlateBlue', element_justification='c', size = (520, 410))
 
   while True:
     evento, valor = tela_cadastro.read()
+    
     if evento == sg.WINDOW_CLOSED or sair == 'Sair':
       break
 
-    if evento == 'Login':
+    if evento == 'Login' or evento == 'Login...':
       tela_cadastro.close()
       tela_login()
 
@@ -57,37 +59,90 @@ def tela_cadastro():
       email_valido = backend.verificar_email(email)
       senha_valida = backend.verificar_senha(senha_Principal, senha_Confirmacao)
 
-      if senha_valida and email_valido: # varifica a senha e o email se estao devidamente corretos
+      if senha_valida and email_valido: 
+        # varifica a senha e o email se estao devidamente corretos
         validacoes += 2
 
       elif not email_valido:
-        # erro de email
-        print('Email inválido') # Melhorar esse tratamento de erro
+        sg.popup('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.', background_color='Slate Blue')
       
       elif not senha_valida:
-        # erro de senha
-        print('Senha inválida') # Melhorar esse tratamento de erro
+        sg.popup('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.', background_color='Slate Blue')
 
       if validacoes == 2:
         backend.salvar_contas(nome_Completo, email, senha_Principal)
-        sg.popup('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.', no_titlebar=True, background_color=  'SlateBlue')
+        with open('backend/BD_Contaas', 'r') as arquivo:
+          linhas = len(arquivo.readlines())
+        arquivo.close()
+
+        with open(f'backend/BD_Dados/Usuario{linhas+1}_Dados.txt', 'xt') as arquivo:
+          arquivo.close()
+        
+        
+        sg.popup('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.', background_color=  'SlateBlue')
         
         tela_cadastro.close()
         tela_inicial()
 
     if evento == 'Limpar Dados':
-      print(1+2)
+      lacunas = [tela_cadastro['Nome_Completo'], tela_cadastro['Email'], tela_cadastro['Senha_Principal'], tela_cadastro['Senha_Confirmação']]
+      for lacuna in lacunas:
+        lacuna.update('')
 
 
 def tela_login():
   # Não terminado 
   layout = [
-    [sg.Text('LOGIN')],
-    [sg.Text('Nome ou Email:')],
-    [sg.Input()],
-    [sg.Text('Senha:')],
-    [sg.Input()]
+    [sg.Image(r'ImageUser.png', background_color='Slate Blue')],
+    [sg.Text('| Email:                               ', background_color='Slate Blue')],
+    [sg.Input(key='Email_Login', size=(20, 1))],
+    [sg.Text('| Senha:                               ', background_color='Slate Blue')],
+    [sg.Input(key='Senha_Login', size=(20, 1), password_char='*')],
+    [sg.Button('Limpar Dados'), sg.Button('Entrar')]
   ]
+
+  tela_login = sg.Window('Login', layout, background_color='Slate Blue', element_justification='c', size=(300, 330))
+
+  while True:
+    evento, valor = tela_login.read()
+
+    if evento == sg.WINDOW_CLOSED:
+      break
+
+    elif evento == 'Entrar':
+      validacao = 0
+
+      email_Login = valor['Email_Login']
+      senha_Login = valor['Senha_Login']
+      
+      if email_Login and senha_Login:
+        email_Valido = backend.verificar_email(email_Login)
+        if email_Valido:
+          sg.popup('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
+
+        else:
+          validacao += 1
+
+        senha_Valida = backend.verificar_senha(senha_Login, email_Login=email_Login)
+        if senha_Valida:
+          validacao += 1
+
+        else:
+          sg.popup('Senha Incorreta!', 'Por favor, digite-a novamente.')
+          
+
+        if validacao == 2:
+          sg.popup('Login Efetuado com Sucesso!', 'Aproveite o App.')
+          tela_inicial()
+
+      else:
+        sg.popup('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
+
+
+    elif evento == 'Limpar Dados':
+      lacunas = [tela_login['Email_Login'], tela_login['Senha_Login']]
+      for lacuna in lacunas:
+        lacuna.update('')
 
 
 def tela_inicial():
@@ -95,7 +150,7 @@ def tela_inicial():
   matriz = backend.inicializar()
     
   layout = [
-    [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Ajuda', ['Sobre...']]],
+    [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Ajuda', ['Perfil', 'Sobre...']]],
             key='barra_menu', 
             background_color='SlateBlue', 
             text_color='Black')

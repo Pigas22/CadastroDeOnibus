@@ -155,29 +155,46 @@ def verificar_email(email): # Fazer tratamento de erro
     return True
 
 
-def verificar_senha(senha_Principal, senha_Confirmacao): # Fazer tratamento de erro 
+def verificar_senha(senha_Principal, senha_Confirmacao='', email_Login=''): # Fazer tratamento de erro 
   validacoes = 0
   numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
   pontos = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',',  '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~']
-  
-  if senha_Principal == senha_Confirmacao:
-    validacoes += 1
+
+  if email_Login != '':
+    with open('backend/BD_Contas/Todas_Contas.txt', 'r') as contas:
+      todas_Contas = contas.readlines()
     
-    for numero in numeros:
-      if numero in senha_Principal:
-        validacoes += 1
-        break
+    contas.close()
 
-    for ponto in pontos:
-      if ponto in senha_Principal:
-        validacoes += 1
-        break
+    senha_Principal = encriptador_senhas(senha_Principal)
 
-  if validacoes == 3:
-    return True
+    for conta in todas_Contas:
+      if email_Login in conta and senha_Principal in conta:
+        return True
 
+    else:
+      return False
+  
+  
   else:
-    return False
+    if senha_Principal == senha_Confirmacao:
+      validacoes += 1
+      
+      for numero in numeros:
+        if numero in senha_Principal:
+          validacoes += 1
+          break
+  
+      for ponto in pontos:
+        if ponto in senha_Principal:
+          validacoes += 1
+          break
+  
+    if validacoes == 3:
+      return True
+  
+    else:
+      return False
 
 
 def salvar_contas(nome_Completo, email, senha_Principal):
