@@ -7,7 +7,7 @@ op_menuBar = ['Menu', 'Menu Principal', 'Sair', 'Navegar', 'Inserir', 'Ver Tudo'
 op_menuPrincpal = ['INSERIR', 'DELETAR', 'ALTERAR', 'VER TUDO', 'CONSULTA ESPECÍFICA']
 
 
-def tela_cadastro():   
+def Tela_Cadastro():   
     validacoes = 0
     sair = ''
   
@@ -39,12 +39,13 @@ def tela_cadastro():
 
     while True:
         evento, valor = tela_cadastro.read()
+
         if evento == sg.WINDOW_CLOSED or sair == 'Sair':
             break
 
         if evento == 'Login' or evento == 'Login...':
             tela_cadastro.close()
-            tela_login()
+            Tela_Login()
 
         elif evento == 'Sair':
             sair = 'Sair'
@@ -55,8 +56,8 @@ def tela_cadastro():
             senha_Principal = valor['Senha_Principal']
             senha_Confirmacao = valor['Senha_Confirmação']
             
-            email_valido = backend.verificar_email(email)
-            senha_valida = backend.verificar_senha(senha_Principal, senha_Confirmacao)
+            email_valido = backend.Verificar_Email(email)
+            senha_valida = backend.Verificar_Senha(senha_Principal, senha_Confirmacao)
 
             if senha_valida and email_valido: 
                 # varifica a senha e o email se estao devidamente corretos
@@ -78,12 +79,12 @@ def tela_cadastro():
                 with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
                     arquivo.close()
 
-                backend.salvar_contas(Id_User, nome_Completo, email, senha_Principal)
+                backend.Salvar_Contas(Id_User, nome_Completo, email, senha_Principal)
                
                 sg.popup('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.', background_color=  'SlateBlue')
         
                 tela_cadastro.close()
-                tela_inicial(Id_User)
+                Tela_Inicial(Id_User)
 
             elif evento == 'Limpar':
                 lacunas = [tela_cadastro['Nome_Completo'], tela_cadastro['Email'], tela_cadastro['Senha_Principal'], tela_cadastro['Senha_Confirmação']]
@@ -91,7 +92,7 @@ def tela_cadastro():
                     lacuna.update('')
 
 
-def tela_login():
+def Tela_Login():
     # Não terminado 
     layout = [
         [sg.Image(r'ImageUser.png', background_color='Slate Blue')],
@@ -117,7 +118,7 @@ def tela_login():
             senha_Login = valor['Senha_Login']
       
             if email_Login and senha_Login:
-                email_Valido = backend.verificar_email(email_Login)
+                email_Valido = backend.Verificar_Email(email_Login)
                 Id_User = email_Valido[1]
                 if email_Valido[0]:
                     sg.popup('Email incorreto!', 'O email informado não está vinculado à nenhuma conta', background_color='Slate Blue')
@@ -125,7 +126,7 @@ def tela_login():
                 else:
                     validacao += 1
     
-                senha_Valida = backend.verificar_senha(senha_Login, email_Login=email_Login)
+                senha_Valida = backend.Verificar_Senha(senha_Login, email_Login=email_Login)
                 if senha_Valida:
                     validacao += 1
     
@@ -135,8 +136,8 @@ def tela_login():
     
                 if validacao == 2:
                     sg.popup('Login Efetuado com Sucesso!', 'Aproveite o App.', background_color='Slate Blue')
-                tela_login.close()
-                tela_inicial(Id_User)
+                    tela_login.close()
+                    Tela_Inicial(Id_User)
               
     
             else:
@@ -149,9 +150,9 @@ def tela_login():
                 lacuna.update('')
 
 
-def tela_inicial(Id_User):
+def Tela_Inicial(Id_User):
     sair = ''
-    matriz = backend.inicializar(Id_User)
+    matriz = backend.Inicializar(Id_User)
     
     layout = [
         [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Ajuda', ['Perfil', 'Sobre...']]], key='barra_menu', background_color='SlateBlue', text_color='Black')],
@@ -172,36 +173,36 @@ def tela_inicial(Id_User):
         elif evento in op_menuPrincpal:
             tela_inicial.close()
             if evento == 'INSERIR':
-                sair = tela_inserir(matriz)
+                sair = Tela_Inserir(matriz, Id_User)
 
-        elif evento == 'VER TUDO':
-            sair = tela_verTudo(matriz)
-    
-        elif evento == 'DELETAR':
-            sair = tela_deletar(matriz)
-    
-        elif evento == 'CONSULTA ESPECÍFICA':
-            sair = tela_consulta(matriz)
-      
-        elif evento == 'ALTERAR':
-            sair = tela_alterar(matriz)
+            elif evento == 'VER TUDO':
+                sair = Tela_VerTudo(matriz, Id_User)
+        
+            elif evento == 'DELETAR':
+                sair = Tela_Deletar(matriz, Id_User)
+        
+            elif evento == 'CONSULTA ESPECÍFICA':
+                sair = Tela_Consulta(matriz, Id_User)
+        
+            elif evento == 'ALTERAR':
+                sair = Tela_Alterar(matriz, Id_User)
 
         elif evento in op_menuBar:
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
-        elif evento == 'Sair':
-            sair = 'Sair'
+            elif evento == 'Sair':
+                sair = 'Sair'
 
-        elif evento == 'Sobre...':
-            print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
+            elif evento == 'Sobre...':
+                print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
 
-        backend.salvar(matriz, Id_User)
+        backend.Salvar(matriz, Id_User)
     
     tela_inicial.close()  
   
 
-def tela_verTudo(matriz):
+def Tela_VerTudo(matriz, Id_User):
     layout_verTudo = [
         [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Navegar', ['Inserir', 'Consulta Específica', 'Alterar', 'Deletar']], ['Ajuda', ['Sobre...']]], 
                  key='barra_menu', 
@@ -221,28 +222,28 @@ def tela_verTudo(matriz):
         if evento in op_menuBar:
             tela_verTudo.close()
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
             elif evento == 'Sair':
                 return 'Sair'
 
             elif evento == 'Inserir':
-                tela_inserir(matriz)
+                Tela_Inserir(matriz, Id_User)
 
             elif evento == 'Alterar':
-                tela_alterar(matriz)
+                Tela_Alterar(matriz, Id_User)
 
             elif evento == 'Consulta Específica':
-                tela_consulta(matriz)
+                Tela_Consulta(matriz, Id_User)
 
             elif evento == 'Deletar':
-                tela_deletar(matriz)
+                Tela_Deletar(matriz, Id_User)
 
             elif evento == 'Sobre...':
                 print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
 
 
-def tela_inserir(matriz):
+def Tela_Inserir(matriz, Id_User):
     layout_inserir = [
         [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Navegar', ['Consulta Específica', 'Ver Tudo', 'Alterar', 'Deletar']], ['Ajuda', ['Sobre...']]], 
                  key='barra_menu', 
@@ -269,35 +270,35 @@ def tela_inserir(matriz):
           destino = valor['destino']
           quant_passageiros = valor['N° de PASSAGEIROS']
     
-          backend.inserir(matriz, motorista, linha, destino, quant_passageiros)
+          backend.Inserir(matriz, motorista, linha, destino, quant_passageiros)
     
           tela_inserir.close()
 
         elif evento in op_menuBar:
             tela_inserir.close()
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
             elif evento == 'Sair':
                 return 'Sair'
 
             elif evento == 'Alterar':
-                tela_alterar(matriz)
+                Tela_Alterar(matriz, Id_User)
 
             elif evento == 'Ver Tudo':
-                tela_verTudo(matriz)
+                Tela_VerTudo(matriz, Id_User)
 
             elif evento == 'Consult Específica':
-                tela_consulta(matriz)
+                Tela_Consulta(matriz, Id_User)
 
             elif evento == 'Deletar':
-                tela_deletar(matriz)
+                Tela_Deletar(matriz, Id_User)
 
             elif evento == 'Sobre...':
                 print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
 
 
-def tela_deletar(matriz):
+def Tela_Deletar(matriz, Id_User):
     tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
     layout_deletar = [
         [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Alterar']], ['Ajuda', ['Sobre...']]], 
@@ -322,22 +323,22 @@ def tela_deletar(matriz):
         elif evento in op_menuBar:
             tela_deletar.close()
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
             elif evento == 'Sair':
                 return 'Sair'
 
             elif evento == 'Inserir':
-                tela_inserir(matriz)
+                Tela_Inserir(matriz, Id_User)
 
             elif evento == 'Ver Tudo':
-                tela_verTudo(matriz)
+                Tela_VerTudo(matriz, Id_User)
 
             elif evento == 'Consulta Específica':
-                tela_consulta(matriz)
+                Tela_Consulta(matriz, Id_User)
 
             elif evento == 'Alterar':
-                tela_alterar(matriz)
+                Tela_Alterar(matriz, Id_User)
 
             elif evento == 'Sobre...':
                 print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
@@ -350,7 +351,7 @@ def tela_deletar(matriz):
         elif evento == 'CONFIRMAR':
             id_do_registro = int(valor['ID'])
             
-            backend.deletar(matriz, local_linha=id_do_registro)
+            backend.Deletar(matriz, local_linha=id_do_registro)
             tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
             
             tabela = tela_deletar['tabela_atual']
@@ -361,7 +362,7 @@ def tela_deletar(matriz):
             resp_delete.update('')
 
 
-def tela_consulta(matriz): # Ainda à modificar
+def Tela_Consulta(matriz, Id_User): # Ainda à modificar
     tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
   
     layout_consulta = [
@@ -385,22 +386,22 @@ def tela_consulta(matriz): # Ainda à modificar
         elif evento in op_menuBar:
             tela_consulta.close()
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
             elif evento == 'Sair':
                 return 'Sair'
 
             elif evento == 'Inserir':
-                tela_inserir(matriz)
+                Tela_Inserir(matriz, Id_User)
 
             elif evento == 'Ver Tudo':
-                tela_verTudo(matriz)
+                Tela_VerTudo(matriz, Id_User)
 
             elif evento == 'Alterar':
-                tela_alterar(matriz)
+                Tela_Alterar(matriz, Id_User)
 
             elif evento == 'Deletar':
-                tela_deletar(matriz)
+                Tela_Deletar(matriz, Id_User)
 
             elif evento == 'Sobre...':
                 print('Feito por: \nSamuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
@@ -410,7 +411,7 @@ def tela_consulta(matriz): # Ainda à modificar
             print(ID)
 
 
-def tela_alterar(matriz, Id_User):
+def Tela_Alterar(matriz, Id_User):
     tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
   
     tamanho_matriz = []
@@ -465,25 +466,25 @@ def tela_alterar(matriz, Id_User):
         elif evento in op_menuBar:
             tela_alterar.close()
             if evento == 'Menu Principal':
-                tela_inicial()
+                Tela_Inicial(Id_User)
 
             elif evento == 'Sair':
                 return 'Sair'
 
             elif evento == 'Inserir':
-                tela_inserir(matriz)
+                Tela_Inserir(matriz, Id_User)
 
             elif evento == 'Ver Tudo':
-                tela_verTudo(matriz)
+                Tela_VerTudo(matriz, Id_User)
 
             elif evento == 'Consulta Específica':
-                tela_consulta(matriz)
+                Tela_Consulta(matriz, Id_User)
 
             elif evento == 'Deletar':
-                tela_deletar(matriz)
+                Tela_Deletar(matriz, Id_User)
 
             elif evento == 'Sobre...':
-                sg.popup('Feito por:', 'Samuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo', background_color=)
+                sg.popup('Feito por:', 'Samuel Paiva Paizante \nThiago Holz Coutinho \nVínicius Rocha Aleixo')
       
         elif evento[0] == 'tabela':
             tabela = tela_alterar['ID_linha']
@@ -500,8 +501,8 @@ def tela_alterar(matriz, Id_User):
             ID_coluna = valor['ID_coluna']
             new_dado = valor['NOVO_DADO']
       
-            backend.alterar_dado(matriz, ID_linha, ID_coluna, new_dado)
-            backend.salvar(matriz, Id_User)
+            backend.Alterar_Dado(matriz, ID_linha, ID_coluna, new_dado)
+            backend.Salvar(matriz, Id_User)
       
             tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
             tabela = tela_alterar['tabela']
@@ -512,5 +513,5 @@ def tela_alterar(matriz, Id_User):
             resposta.update('')
 
 
-def tela_creditos():
+def Tela_Creditos():
     print()

@@ -14,7 +14,7 @@ colunas_inversa = {
 }
 
 
-def inicializar(Id_User):
+def Inicializar(Id_User):
     # colocar assim que abrir o app, para puxar as informações do arquivo.    
     with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'rt') as arquivo:
         linhas = arquivo.readlines()
@@ -44,7 +44,7 @@ def inicializar(Id_User):
     return matriz
 
 
-def salvar(matriz, Id_User):
+def Salvar(matriz, Id_User):
     for linha in matriz:
         if ' ' in linha[0]:
             linha[0] = '_'.join(linha[0].split())
@@ -63,7 +63,7 @@ def salvar(matriz, Id_User):
     return 'Informações salvas com sucesso!'
 
   
-def mostrar_tudo(matriz):
+def Mostrar_Tudo(matriz):
     # Não será necessário.
     for i in matriz:
         for item in i:
@@ -72,7 +72,7 @@ def mostrar_tudo(matriz):
         print()
     
 
-def deletar(matriz, local_linha='', resetar=False):
+def Deletar(matriz, local_linha='', resetar=False):
     if resetar:
         # reseta toda a matriz
         matriz = []
@@ -91,7 +91,7 @@ def deletar(matriz, local_linha='', resetar=False):
         return 'Erro!'
 
 
-def consulta_espec(matriz, local_linha=''):
+def Consulta_Espec(matriz, local_linha=''):
     """
         A função retornará uma linha inteira.
 
@@ -113,14 +113,14 @@ def consulta_espec(matriz, local_linha=''):
         return dados
 
 
-def inserir(matriz, motorista, linha, destino, quant_passageiros):
+def Inserir(matriz, motorista, linha, destino, quant_passageiros):
     motorista = motorista.title()
     
     linha = [motorista, linha, destino, quant_passageiros]
     matriz.append(linha)
 
 
-def alterar_dado(matriz, local_linha, local_coluna, novo_dado):
+def Alterar_Dado(matriz, local_linha, local_coluna, novo_dado):
     global colunas
 
     local_coluna = colunas[local_coluna]
@@ -131,7 +131,7 @@ def alterar_dado(matriz, local_linha, local_coluna, novo_dado):
     matriz[local_linha][local_coluna] = novo_dado
 
 
-def verificar_email(email): # Fazer tratamento de erro
+def Verificar_Email(email): # Fazer tratamento de erro
     with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_emails:
         linhas = arquivo_emails.readlines()
     arquivo_emails.close()
@@ -148,7 +148,7 @@ def verificar_email(email): # Fazer tratamento de erro
         return True
 
 
-def verificar_senha(senha_Principal, senha_Confirmacao='', email_Login=''): # Fazer tratamento de erro 
+def Verificar_Senha(senha_Principal, senha_Confirmacao='', email_Login=''): # Fazer tratamento de erro 
   validacoes = 0
   numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
   pontos = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',',  '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~']
@@ -159,7 +159,7 @@ def verificar_senha(senha_Principal, senha_Confirmacao='', email_Login=''): # Fa
     
     contas.close()
 
-    senha_Principal = encriptador_senhas(senha_Principal)
+    senha_Principal = Encriptador_Senhas(senha_Principal)
 
     for conta in todas_Contas:
       if email_Login in conta and senha_Principal in conta:
@@ -190,9 +190,9 @@ def verificar_senha(senha_Principal, senha_Confirmacao='', email_Login=''): # Fa
       return False
 
 
-def salvar_contas(Id_User, nome_Completo, email, senha_Principal):
+def Salvar_Contas(Id_User, nome_Completo, email, senha_Principal):
     nome_Completo = '_'.join(nome_Completo.split())
-    senha_Encriptada = encriptador_senhas(senha_Principal)
+    senha_Encriptada = Encriptador_Senhas(senha_Principal)
   
     with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_Contas:
         linhas = arquivo_Contas.readlines()
@@ -211,7 +211,7 @@ def salvar_contas(Id_User, nome_Completo, email, senha_Principal):
     return 'Conta salva com sucesso!'
 
 
-def encriptador_senhas(senha):
+def Encriptador_Senhas(senha):
     # a ser desenvolvido
     encriptacao = {
         # conter todas as caracteres possiveis para fazer a encriptação
