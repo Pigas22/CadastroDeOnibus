@@ -1,4 +1,4 @@
 import interface
 
 
-interface.tela_cadastro()
+interface.Tela_Cadastro()
