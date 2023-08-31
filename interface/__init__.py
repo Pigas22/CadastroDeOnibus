@@ -29,7 +29,7 @@ def Tela_Cadastro():
     layout = [
         [sg.Menu([['Menu', ['Login', 'Sair']], ['Ajuda', ['Sobre...']]])],
         [sg.Text('Login...', size=(40, 1), justification='r', background_color='Slate Blue', enable_events=True, font='Arial 15 underline')],
-        [sg.Image('interface\ImageUser.png', background_color='Slate Blue')],
+        [sg.Image(r'C:\\Users\\wholz\\OneDrive\\Área de Trabalho\\Thiago\\CadastroDeOnibus\\interface\\ImageUser.png', background_color='Slate Blue')],
         [sg.Column(col1, background_color='SlateBlue'), sg.Column(col2, background_color='SlateBlue')],
         [sg.Frame('Obs: ', [[sg.Text('As senhas devem conter números e caracteres especiais, \ncomo: ! @ # $ %', background_color='SlateBlue')]], background_color='SlateBlue')],
         [sg.Button('Limpar'), sg.Button('Salvar Dados')]
@@ -95,7 +95,7 @@ def Tela_Cadastro():
 def Tela_Login():
     # Não terminado 
     layout = [
-        [sg.Image('interface\ImageUser.png', background_color='Slate Blue')],
+        [sg.Image(r'C:\\Users\\wholz\\OneDrive\\Área de Trabalho\\Thiago\\CadastroDeOnibus\\interface\\ImageUser.png', background_color='Slate Blue')],
         [sg.Text('| Email:                               ', background_color='Slate Blue')],
         [sg.Input(key='Email_Login', size=(20, 1))],
         [sg.Text('| Senha:                               ', background_color='Slate Blue')],
