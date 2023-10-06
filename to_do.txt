@@ -1,0 +1,17 @@
+Lista de Afazeres no Projeto:
+[Check] - Popup de Crétidos
+- Tela de Perfil
+- Terminar a Tela de Login
+- Criar a Classe Usuário
+[Check] - Seperar todas as funções do backend e interface
+[Check] - Resolver todas as importações nos arquivos de cada função
+[Check] - Terminar a Tela de Consulta
+- Função de resetar toda a matriz (Tela_Deletar)
+- Corrigir o loop das telas e como elas funcionam
+- Padronizar essas infos nos arquivos:
+    | cor_FundoObjs
+    | tema
+    | fonte
+    | tamanho_Fonte
+    | cor_Texto
+- Revisar cada Função e arquivo do Programa(POR ÚLTIMO)
