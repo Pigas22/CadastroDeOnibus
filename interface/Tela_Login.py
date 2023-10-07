@@ -12,7 +12,7 @@ def Tela_Login(): # Não terminado
     
     layout = [
         [sg.Menu(Barra_Menu)],
-        [sg.Image(r'ImageUser.png', background_color= detalhes['corFundo'])],
+        [sg.Image(r'interface/ImageUser.png', background_color= detalhes['corFundo'])],
         [sg.Text('| Email:                               ', background_color= detalhes['corFundo'])],
         [sg.Input(key='Email_Login', size=(20, 1))],
         [sg.Text('| Senha:                               ', background_color= detalhes['corFundo'])],

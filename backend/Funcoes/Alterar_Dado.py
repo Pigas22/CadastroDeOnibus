@@ -1,5 +1,5 @@
 def Alterar_Dado(matriz, local_linha, local_coluna, novo_dado):
-    global colunas
+    from backend.Colunas import colunas
 
     local_coluna = colunas[local_coluna]
   

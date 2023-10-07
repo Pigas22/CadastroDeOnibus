@@ -38,6 +38,11 @@ matriz = []
 while True:
     window, evento, valor = sg.read_all_windows()
 
+    print(f'JANELA: {window}')
+    print(f'EVENTO: {evento}')
+    print(f'VALOR: {valor}')
+    print('======================================================')
+
     if window == janelaCadastro:
         validacoes = 0
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
@@ -150,7 +155,7 @@ while True:
             janelaInserir.close()
             janelaInicial = Tela_Inicial(Id_User)
       
-        elif evento == 'Cadastrar':
+        if evento == 'Cadastrar':
           motorista = valor['motorista']    
           linha = valor['linha']
           destino = valor['destino']

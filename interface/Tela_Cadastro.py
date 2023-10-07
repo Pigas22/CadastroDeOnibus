@@ -26,7 +26,7 @@ def Tela_Cadastro():
     layout = [
         [sg.Menu(Barra_Menu)],
         [sg.Text('Login...', size=(40, 1), justification='r', background_color='Slate Blue', enable_events=True, font=f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]} underline')],
-        [sg.Image(r'ImageUser.png', background_color='Slate Blue')],
+        [sg.Image(r'interface/ImageUser.png', background_color='Slate Blue')],
         [sg.Column(col1, background_color=detalhes['corFundo']), sg.Column(col2, background_color=detalhes['corFundo'])],
         [sg.Frame('Obs: ', [[sg.Text('As senhas devem conter números e caracteres especiais, \ncomo: ! @ # $ %', background_color=detalhes['corFundo'])]], background_color=detalhes['corFundo'])],
         [sg.Button('Limpar'), sg.Button('Salvar Dados')]
