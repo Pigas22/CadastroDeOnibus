@@ -156,12 +156,15 @@ while True:
             janelaInicial = Tela_Inicial(Id_User)
       
         if evento == 'Cadastrar':
-          motorista = valor['motorista']    
-          linha = valor['linha']
-          destino = valor['destino']
-          quant_passageiros = valor['N° de PASSAGEIROS']
+            motorista = valor['motorista']    
+            linha = valor['linha']
+            destino = valor['destino']
+            quant_passageiros = valor['N° de PASSAGEIROS']
     
-          Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
+            Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
+            
+            sg.popup('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".', background_color= detalhes['corFundo'], any_key_closes= True)
+        
     
 
     elif window == janelaVerTudo:
