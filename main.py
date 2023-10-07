@@ -163,10 +163,8 @@ while True:
             destino = valor['destino']
             quant_passageiros = valor['N° de PASSAGEIROS']
     
-            Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
+          Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
     
-            sg.popup('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".', background_color= detalhes['corFundo'], any_key_closes= True)
-            
 
     elif window == janelaVerTudo:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
