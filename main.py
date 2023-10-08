@@ -21,7 +21,7 @@ detalhes = {
     'fonte': 'Arial',
     'tamanhoFonte': '12',
     'corTexto': 'Black'
-}
+    }
 
 janelaCadastro = Tela_Cadastro()
 janelaLogin = None
@@ -37,17 +37,14 @@ popupPadrao = None
 
 matriz = []
 
-while janelaCadastro != None:
+while True:
     window, evento, valor = sg.read_all_windows()
 
     if window == janelaCadastro:
-        print("janelaCadastro")
-
         validacoes = 0
         
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaCadastro:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaCadastro.close()
-            janelaCadastro = None
             break
 
         elif evento == 'Login' or evento == 'Login...':
@@ -99,12 +96,7 @@ while janelaCadastro != None:
 
     
     elif window == janelaLogin:
-        print("janelaLogin")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaLogin:
-            janelaLogin.close()
-            break
-
-        elif evento == 'Cadastro':
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaLogin.close()
             janelaCadastro = Tela_Cadastro()
 
@@ -148,15 +140,13 @@ while janelaCadastro != None:
 
     
     elif window == janelaInicial:
-        print("janelaInicial")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaInicial:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaInicial.close()
             break
 
     
     elif window == janelaInserir:
-        print("janelaInserir")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaInserir:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaInserir.close()
             janelaInicial = Tela_Inicial(Id_User)
       
@@ -176,15 +166,13 @@ while janelaCadastro != None:
 
 
     elif window == janelaVerTudo:
-        print("janelaVerTudo")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaVerTudo:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaVerTudo.close()
             janelaInicial = Tela_Inicial(Id_User) 
             
 
     elif window == janelaDeletar:
-        print("janelaDeletar")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaDeletar:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaDeletar.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -208,12 +196,10 @@ while janelaCadastro != None:
 
     
     elif window == janelaConsulta:
-        print("janelaConsulta") 
-
         filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaConsulta:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaConsulta.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -276,8 +262,7 @@ while janelaCadastro != None:
 
 
     elif window == janelaAlterar:
-        print("janelaAlterar")
-        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaAlterar:
+        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaAlterar.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -316,6 +301,9 @@ while janelaCadastro != None:
         if evento == 'Menu Principal':
             janelaInicial = Tela_Inicial(Id_User)
 
+        elif evento == 'Cadastro':
+            janelaCadastro = Tela_Cadastro()
+
         elif evento == 'Inserir' or evento == 'INSERIR':
             janelaInserir = Tela_Inserir(matriz, Id_User)
         
@@ -334,7 +322,7 @@ while janelaCadastro != None:
         elif evento == 'Sobre...':
             Popup_Creditos()
         
-        if evento != 'Sobre...':
+        if evento != 'Sobre...' and evento != 'Cadastro':
             Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
 
 print('Fora do Loop')

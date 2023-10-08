@@ -14,4 +14,4 @@ def Tela_VerTudo(matriz, Id_User):
         [sg.Table(values = matriz, headings=[ 'MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', expand_y= True)]
     ]
 
-    return sg.Window('VER TUDO', layout_verTudo, background_color= detalhes['corFundo'], finalize= True, size= (700, 200))
+    return sg.Window('VER TUDO', layout_verTudo, background_color= detalhes['corFundo'], finalize= True, size= (600, 250))
