@@ -1,6 +1,6 @@
 def Tela_Consulta(matriz, Id_User): # Ainda à modificar
     import PySimpleGUI as sg
-    from main import detalhes
+    from interface.Detalhes import detalhes
     
 
     sg.theme(detalhes['tema'])
@@ -32,7 +32,7 @@ def Tela_Consulta(matriz, Id_User): # Ainda à modificar
         [sg.Frame('Filtro', layout=layout_Frame, background_color= detalhes['corFundo'])],
         
         [sg.Text('| Informe o Dado Abaixo:',  background_color= detalhes['corFundo'], font=f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]}', text_color= detalhes['corTexto'])],
-        [sg.Input(key='KEY_PESQUISA', size=(20, 1)), sg.Button('CONFIRMAR')]
+        [sg.Input(key='KEY_PESQUISA', size=(20, 1)), sg.Button('CONFIRMAR', size= detalhes['sizeBotão'])]
     ]
   
     layout_consulta = [

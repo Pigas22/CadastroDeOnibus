@@ -1,6 +1,6 @@
 def Popup_Padrao(titulo, texto):
     import PySimpleGUI as sg
-    from main import detalhes
+    from interface.Detalhes import detalhes
 
     sg.theme(detalhes['tema'])
 

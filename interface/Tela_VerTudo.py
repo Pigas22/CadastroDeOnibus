@@ -1,6 +1,6 @@
 def Tela_VerTudo(matriz, Id_User):
     import PySimpleGUI as sg
-    from main import detalhes
+    from interface.Detalhes import detalhes
 
 
     sg.theme(detalhes['tema'])

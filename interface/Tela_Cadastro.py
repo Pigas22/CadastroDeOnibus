@@ -1,6 +1,6 @@
 def Tela_Cadastro(): 
     import PySimpleGUI as sg
-    from main import detalhes
+    from interface.Detalhes import detalhes
     
     sg.theme(detalhes['tema'])
   
@@ -35,7 +35,7 @@ def Tela_Cadastro():
         [sg.Column(col1, background_color=detalhes['corFundo']), sg.Column(col2, background_color=detalhes['corFundo'])],
         [sg.Column(col3, background_color=detalhes['corFundo']), sg.Column(col4, background_color=detalhes['corFundo'])],
         [sg.Frame('Obs: ', [[sg.Text('As senhas devem conter números e caracteres especiais, \ncomo: ! @ # $ %', background_color=detalhes['corFundo'])]], background_color=detalhes['corFundo'])],
-        [sg.Button('Limpar', size= (10, 1)), sg.Button('Salvar Dados', size= (10, 1)), sg.Button('Login...', size= (10, 1))]
+        [sg.Button('Limpar', size= detalhes['sizeBotão']), sg.Button('Salvar Dados', size= detalhes['sizeBotão']), sg.Button('Login...', size= detalhes['sizeBotão'])]
     ]
 
     return sg.Window('Cadastro', layout, background_color= detalhes['corFundo'], element_justification= 'c', size = (500, 400), return_keyboard_events= True, finalize= True)

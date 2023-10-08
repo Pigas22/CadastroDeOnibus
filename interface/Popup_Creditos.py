@@ -1,5 +1,5 @@
 def Popup_Creditos(): # a ser feito
-    from main import detalhes
+    from interface.Detalhes import detalhes
     import PySimpleGUI as sg
     
     sg.theme(detalhes["tema"])

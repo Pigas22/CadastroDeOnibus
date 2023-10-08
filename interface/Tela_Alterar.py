@@ -1,6 +1,6 @@
 def Tela_Alterar(matriz, Id_User):
     import PySimpleGUI as sg
-    from main import detalhes
+    from interface.Detalhes import detalhes
 
     
     sg.theme(detalhes['tema'])
@@ -36,7 +36,7 @@ def Tela_Alterar(matriz, Id_User):
             [sg.Column(col1, element_justification='c', background_color= detalhes['corFundo']), sg.VSep(), sg.Column(col2, element_justification='c', background_color= detalhes['corFundo'])],
             [sg.Text('  ', background_color= detalhes['corFundo'])],
             [sg.Text('Novo Dado:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.Input(key='NOVO_DADO', size=(10, 1))],
-            [sg.Button('CONFIRMAR')]
+            [sg.Button('CONFIRMAR', size= detalhes['sizeBotão'])]
         ], background_color= detalhes['corFundo'], element_justification='c', title_location='n')]
     ]
   

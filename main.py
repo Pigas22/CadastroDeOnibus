@@ -15,14 +15,6 @@ from interface.Tela_PerfilUser import Tela_PerfilUser # Vou usar ainda
 from interface.Op_MenuBAR import op_menuBar
 
 
-detalhes = {
-    'corFundo': 'SlateBlue',
-    'tema': 'DarkBlue',
-    'fonte': 'Arial',
-    'tamanhoFonte': '12',
-    'corTexto': 'Black'
-    }
-
 janelaCadastro = Tela_Cadastro()
 janelaLogin = None
 janelaInicial = None
@@ -44,11 +36,11 @@ while True:
         validacoes = 0
         
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaCadastro.close()
+            window.close()
             exit()
 
         elif evento == 'Login' or evento == 'Login...':
-            janelaCadastro.close()
+            window.close()
             janelaLogin = Tela_Login()
 
         elif evento == 'Salvar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
@@ -84,7 +76,7 @@ while True:
                
                 Popup_Padrao('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
         
-                janelaCadastro.close()
+                window.close()
                 matriz = Inicializar.Inicializar(Id_User)
                 janelaInicial = Tela_Inicial(Id_User)
                 
@@ -97,7 +89,7 @@ while True:
     
     elif window == janelaLogin:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaLogin.close()
+            window.close()
             janelaCadastro = Tela_Cadastro()
 
         elif evento == 'Fazer Login' or evento == 'KP_Enter:104' or evento == 'Return:36':
@@ -125,7 +117,7 @@ while True:
     
                 if validacao == 2:
                     Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
-                    janelaLogin.close()
+                    window.close()
                     matriz = Inicializar.Inicializar(Id_User)
                     janelaInicial = Tela_Inicial(Id_User)
               
@@ -141,13 +133,13 @@ while True:
     
     elif window == janelaInicial:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaInicial.close()
+            window.close()
             break
 
     
     elif window == janelaInserir:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaInserir.close()
+            window.close()
             janelaInicial = Tela_Inicial(Id_User)
       
         if evento == 'Cadastrar':
@@ -167,13 +159,13 @@ while True:
 
     elif window == janelaVerTudo:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaVerTudo.close()
+            window.close()
             janelaInicial = Tela_Inicial(Id_User) 
             
 
     elif window == janelaDeletar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaDeletar.close()
+            window.close()
             janelaInicial = Tela_Inicial(Id_User)
 
         elif evento[0] == 'tabela_atual':
@@ -181,10 +173,15 @@ while True:
             selected_id.update(evento[2][0])
             valor['ID'] = evento[2][0]
 
-        elif evento == 'CONFIRMAR':
-            id_do_registro = int(valor['ID'])
+        elif evento == 'CONFIRMAR' or evento == 'RESETAR MATRIZ':
+            if evento == 'CONFIRMAR':
+                id_do_registro = int(valor['ID'])
             
-            Deletar.Deletar(matriz, local_linha= id_do_registro)
+                Deletar.Deletar(matriz, local_linha= id_do_registro)
+
+            elif evento == 'RESETAR MATRIZ':
+                Deletar.Deletar(matriz, resetar= True)
+
             tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
             
             tabela = janelaDeletar['tabela_atual']
@@ -193,14 +190,14 @@ while True:
             Popup_Padrao('Operação bem-sucedida', 'Valor deletado com sucesso!')
             resp_delete = janelaDeletar['ID']
             resp_delete.update('')
-
     
+
     elif window == janelaConsulta:
         filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaConsulta.close()
+            window.close()
             janelaInicial = Tela_Inicial(Id_User)
 
         elif evento == 'CONFIRMAR':
@@ -263,7 +260,7 @@ while True:
 
     elif window == janelaAlterar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaAlterar.close()
+            window.close()
             janelaInicial = Tela_Inicial(Id_User)
 
       
