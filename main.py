@@ -45,7 +45,7 @@ while True:
         
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaCadastro.close()
-            break
+            exit()
 
         elif evento == 'Login' or evento == 'Login...':
             janelaCadastro.close()
