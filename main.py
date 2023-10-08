@@ -324,5 +324,3 @@ while True:
         
         if evento != 'Sobre...' and evento != 'Cadastro':
             Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
-
-print('Fora do Loop')
