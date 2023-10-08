@@ -1,15 +1,16 @@
 import PySimpleGUI as sg
 from backend import Colunas_Inversa
 from backend.Funcoes import Verificar_Email, Verificar_Senha, Salvar_Contas, Salvar_Matriz, Inicializar, Inserir, Deletar, Alterar_Dado
-from interface.Tela_Cadastro import Tela_Cadastro #
-from interface.Tela_Login import Tela_Login #
-from interface.Tela_Inicial import Tela_Inicial #
-from interface.Tela_Inserir import Tela_Inserir #
-from interface.Tela_VerTudo import Tela_VerTudo #
-from interface.Tela_Deletar import Tela_Deletar #
-from interface.Tela_Consulta import Tela_Consulta # 
-from interface.Tela_Alterar import Tela_Alterar #
+from interface.Tela_Cadastro import Tela_Cadastro
+from interface.Tela_Login import Tela_Login
+from interface.Tela_Inicial import Tela_Inicial
+from interface.Tela_Inserir import Tela_Inserir
+from interface.Tela_VerTudo import Tela_VerTudo
+from interface.Tela_Deletar import Tela_Deletar
+from interface.Tela_Consulta import Tela_Consulta 
+from interface.Tela_Alterar import Tela_Alterar
 from interface.Popup_Creditos import Popup_Creditos
+from interface.Popup_Padrao import Popup_Padrao
 from interface.Tela_PerfilUser import Tela_PerfilUser # Vou usar ainda
 from interface.Op_MenuBAR import op_menuBar
 
@@ -31,27 +32,25 @@ janelaDeletar = None
 janelaConsulta = None
 janelaAlterar = None
 janelaPerfilUser = None
-popupCreditos = None 
+popupCreditos = None
+popupPadrao = None
 
 matriz = []
 
-while True:
+while janelaCadastro != None:
     window, evento, valor = sg.read_all_windows()
 
-    """
-    print(f'JANELA: {window}')
-    print(f'EVENTO: {evento}')
-    print(f'VALOR: {valor}')
-    print('======================================================')
-    """
-
     if window == janelaCadastro:
+        print("janelaCadastro")
+
         validacoes = 0
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaCadastro:
             janelaCadastro.close()
+            janelaCadastro = None
             break
 
-        if evento == 'Login' or evento == 'Login...':
+        elif evento == 'Login' or evento == 'Login...':
             janelaCadastro.close()
             janelaLogin = Tela_Login()
 
@@ -69,10 +68,10 @@ while True:
                 validacoes += 2
 
             elif not email_valido:
-                sg.popup('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.', background_color='Slate Blue')
+                Popup_Padrao('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.')
       
             elif not senha_valida:
-                sg.popup('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.', background_color='Slate Blue')
+                Popup_Padrao('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.')
 
             if validacoes == 2:
                 with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo:
@@ -86,7 +85,7 @@ while True:
 
                 Salvar_Contas.Salvar_Contas(Id_User, nome_Completo, email, senha_Principal)
                
-                sg.popup('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.', background_color=  'SlateBlue')
+                Popup_Padrao('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
         
                 janelaCadastro.close()
                 matriz = Inicializar.Inicializar(Id_User)
@@ -100,7 +99,8 @@ while True:
 
     
     elif window == janelaLogin:
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        print("janelaLogin")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaLogin:
             janelaLogin.close()
             break
 
@@ -118,7 +118,7 @@ while True:
                 email_Valido = Verificar_Email.Verificar_Email(email_Login)
                 Id_User = email_Valido[1]
                 if email_Valido[0]:
-                    sg.popup('Email incorreto!', 'O email informado não está vinculado à nenhuma conta', background_color=detalhes['corFundo'])
+                    Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
     
                 else:
                     validacao += 1
@@ -128,18 +128,18 @@ while True:
                     validacao += 1
     
                 else:
-                    sg.popup('Senha Incorreta!', 'Por favor, digite-a novamente.', background_color=detalhes['corFundo'])
+                    Popup_Padrao('Senha Incorreta!', 'Por favor, digite-a novamente.')
               
     
                 if validacao == 2:
-                    sg.popup('Login Efetuado com Sucesso!', 'Aproveite o App.', background_color=detalhes['corFundo'])
+                    Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
                     janelaLogin.close()
                     matriz = Inicializar.Inicializar(Id_User)
                     janelaInicial = Tela_Inicial(Id_User)
               
     
             else:
-                sg.popup('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
+                Popup_Padrao('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
 
         elif evento == 'Limpar':
             lacunas = [janelaLogin['Email_Login'], janelaLogin['Senha_Login']]
@@ -148,12 +148,15 @@ while True:
 
     
     elif window == janelaInicial:
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        print("janelaInicial")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaInicial:
+            janelaInicial.close()
             break
 
     
     elif window == janelaInserir:
-        if evento == sg.WINDOW_CLOSED:
+        print("janelaInserir")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaInserir:
             janelaInserir.close()
             janelaInicial = Tela_Inicial(Id_User)
       
@@ -165,17 +168,23 @@ while True:
     
             Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
 
-            sg.popup('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".', background_color= detalhes['corFundo'], any_key_closes= True, text_color= 'White')
-    
+            Popup_Padrao('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".')
+
+            lacunas = [janelaInserir['motorista'], janelaInserir['linha'], janelaInserir['destino'], janelaInserir['N° de PASSAGEIROS']]
+            for lacuna in lacunas:
+                lacuna.update('')
+
 
     elif window == janelaVerTudo:
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        print("janelaVerTudo")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaVerTudo:
             janelaVerTudo.close()
             janelaInicial = Tela_Inicial(Id_User) 
             
 
     elif window == janelaDeletar:
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        print("janelaDeletar")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaDeletar:
             janelaDeletar.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -193,16 +202,18 @@ while True:
             tabela = janelaDeletar['tabela_atual']
             tabela.update(values=tabela_comId)
             
-            sg.popup_auto_close('Operação bem-sucedida', 'Valor deletado com sucesso! ', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'], font='Arial 12')
+            Popup_Padrao('Operação bem-sucedida', 'Valor deletado com sucesso!')
             resp_delete = janelaDeletar['ID']
             resp_delete.update('')
 
     
     elif window == janelaConsulta:
+        print("janelaConsulta") 
+
         filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaConsulta:
             janelaConsulta.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -223,7 +234,7 @@ while True:
                         matriz_Pesquisa.append(matriz[int(chave_pesquisa)])
 
                     except ValueError:
-                        sg.popup('Error:', 'Informe apenas o ID do Ônibus', background_color=  detalhes['corFundo'])
+                        Popup_Padrao('Error:', 'Informe apenas o ID do Ônibus')
     
                 else:
                     for linha in matriz:
@@ -231,7 +242,7 @@ while True:
                             matriz_Pesquisa.append(linha)
 
                     if len(matriz_Pesquisa) == 0:
-                        sg.popup('Error: ', 'Não possui esse dado no Banco', background_color= detalhes['corFundo'])
+                        Popup_Padrao('Error: ', 'Não possui esse dado no Banco')
     
                 tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz_Pesquisa)]
                 janelaConsulta['tabela'].update(values=tabela_comId)
@@ -240,7 +251,7 @@ while True:
 
 
             except IndexError:
-                sg.popup('Error: ', 'Não possui esse dado no Banco', background_color=  detalhes['corFundo'])
+                Popup_Padrao('Error: ', 'Não possui esse dado no Banco')
         
         elif evento in filtros_Keys:
             if valor['FILTRO_ID']:
@@ -265,7 +276,8 @@ while True:
 
 
     elif window == janelaAlterar:
-        if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+        print("janelaAlterar")
+        if (evento == sg.WINDOW_CLOSED or evento == 'Sair') and window == janelaAlterar:
             janelaAlterar.close()
             janelaInicial = Tela_Inicial(Id_User)
 
@@ -292,13 +304,14 @@ while True:
             tabela = janelaAlterar['tabela']
             tabela.update(values=tabela_comId)
       
-            sg.popup_auto_close('Operação bem-sucedida', 'Valor alterado com sucesso! ', background_color='Slate Blue', text_color= detalhes['corTexto'], font=f'{ detalhes["fonte"]} { detalhes["tamanhoFonte"]}')
+            Popup_Padrao('Operação bem-sucedida', 'Valor alterado com sucesso!')
             resposta = janelaAlterar['NOVO_DADO']
             resposta.update('')
 
     
-    if evento in op_menuBar:    
-        window.close()
+    if evento in op_menuBar:
+        if evento != 'Sair':
+            window.close()
         
         if evento == 'Menu Principal':
             janelaInicial = Tela_Inicial(Id_User)
@@ -320,5 +333,8 @@ while True:
 
         elif evento == 'Sobre...':
             Popup_Creditos()
+        
+        if evento != 'Sobre...':
+            Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
 
-        Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
+print('Fora do Loop')
