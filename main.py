@@ -36,11 +36,11 @@ while True:
         validacoes = 0
         
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
+            janelaCadastro.close()
             exit()
 
         elif evento == 'Login' or evento == 'Login...':
-            window.close()
+            janelaCadastro.close()
             janelaLogin = Tela_Login()
 
         elif evento == 'Salvar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
@@ -76,7 +76,7 @@ while True:
                
                 Popup_Padrao('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
         
-                window.close()
+                janelaCadastro.close()
                 matriz = Inicializar.Inicializar(Id_User)
                 janelaInicial = Tela_Inicial(Id_User)
                 
@@ -87,10 +87,10 @@ while True:
                     lacuna.update('')
 
     
-    elif window == janelaLogin:
+    elif window == janelaLogin: # Adicionar VoltarCadastro
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            janelaCadastro = Tela_Cadastro()
+            janelaLogin.close()
+            exit()
 
         elif evento == 'Fazer Login' or evento == 'KP_Enter:104' or evento == 'Return:36':
             validacao = 0
@@ -117,7 +117,7 @@ while True:
     
                 if validacao == 2:
                     Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
-                    window.close()
+                    janelaLogin.close()
                     matriz = Inicializar.Inicializar(Id_User)
                     janelaInicial = Tela_Inicial(Id_User)
               
@@ -125,22 +125,23 @@ while True:
             else:
                 Popup_Padrao('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
 
-        elif evento == 'Limpar':
-            lacunas = [janelaLogin['Email_Login'], janelaLogin['Senha_Login']]
-            for lacuna in lacunas:
-                lacuna.update('')
+        elif evento == 'LimparEmail':
+            janelaLogin['Email_Login'].update('')
+
+        elif evento == 'LimparSenha':
+            janelaLogin['Senha_Login'].update('')
 
     
     elif window == janelaInicial:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            break
+            janelaInicial.close()
+            exit()
 
     
-    elif window == janelaInserir:
+    elif window == janelaInserir: # Adicionar Voltar
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            janelaInicial = Tela_Inicial(Id_User)
+            janelaInserir.close()
+            exit()
       
         if evento == 'Cadastrar':
             motorista = valor['motorista']    
@@ -157,16 +158,16 @@ while True:
                 lacuna.update('')
 
 
-    elif window == janelaVerTudo:
+    elif window == janelaVerTudo: # Adicionar Voltar
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            janelaInicial = Tela_Inicial(Id_User) 
+            janelaVerTudo.close()
+            exit()
             
 
-    elif window == janelaDeletar:
+    elif window == janelaDeletar: # Adicionar Voltar
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            janelaInicial = Tela_Inicial(Id_User)
+            janelaDeletar.close()
+            exit()
 
         elif evento[0] == 'tabela_atual':
             selected_id = janelaDeletar['ID']
@@ -192,13 +193,13 @@ while True:
             resp_delete.update('')
     
 
-    elif window == janelaConsulta:
+    elif window == janelaConsulta: # Adicionar Voltar
         filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
-            janelaInicial = Tela_Inicial(Id_User)
+            janelaConsulta.close()
+            exit()
 
         elif evento == 'CONFIRMAR':
             janelaConsulta['MATRIZ_ORIGINAL'].update(False)
@@ -258,9 +259,9 @@ while True:
             tabela.update(values=tabela_comId)
 
 
-    elif window == janelaAlterar:
+    elif window == janelaAlterar: # Adicionar Voltar
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            window.close()
+            janelaAlterar.close()
             janelaInicial = Tela_Inicial(Id_User)
 
       
@@ -295,10 +296,10 @@ while True:
         if evento != 'Sair':
             window.close()
         
-        if evento == 'Menu Principal':
+        if evento == 'Menu Principal' or evento == 'Voltar':
             janelaInicial = Tela_Inicial(Id_User)
 
-        elif evento == 'Cadastro':
+        elif evento == 'Cadastro' or evento == 'VoltarCadastro':
             janelaCadastro = Tela_Cadastro()
 
         elif evento == 'Inserir' or evento == 'INSERIR':
@@ -319,5 +320,5 @@ while True:
         elif evento == 'Sobre...':
             Popup_Creditos()
         
-        if evento != 'Sobre...' and evento != 'Cadastro':
+        if evento != 'Sobre...' and evento != 'Cadastro' and evento != 'VoltarCadastro':
             Salvar_Matriz.Salvar_Matriz(matriz, Id_User)

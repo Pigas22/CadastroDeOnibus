@@ -1,5 +1,7 @@
 Lista de Afazeres no Projeto:
 [Check] - Popup de Crétidos
+- Adicionar Voltar nas telas
+- Adicionar um log de informações e alterações com data e hora, arquivo separado.
 - Tela de Perfil
 - Terminar a Tela de Login
 [Check] - Seperar todas as funções do backend e interface
