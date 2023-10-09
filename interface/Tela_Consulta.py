@@ -23,6 +23,7 @@ def Tela_Consulta(matriz, Id_User): # Ainda à modificar
             sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PESSOAS'], justification='left', key='tabela')
         ],
         [
+            sg.Button('Voltar', size= detalhes['sizeBotão']),
             sg.Checkbox('Mostrar tabela sem filtro', background_color= detalhes['corFundo'], text_color='White', font= detalhes['fonte'], enable_events=True, key='MATRIZ_ORIGINAL')
         ]
     ]
@@ -30,6 +31,8 @@ def Tela_Consulta(matriz, Id_User): # Ainda à modificar
     layout_ColunaDir = [
         [sg.Text('| Selecione o Filtro da pesquisa:', background_color= detalhes["corFundo"], font=f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]}', text_color= detalhes['corTexto'])],
         [sg.Frame('Filtro', layout=layout_Frame, background_color= detalhes['corFundo'])],
+
+        [sg.Text('', background_color= detalhes['corFundo'])],
         
         [sg.Text('| Informe o Dado Abaixo:',  background_color= detalhes['corFundo'], font=f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]}', text_color= detalhes['corTexto'])],
         [sg.Input(key='KEY_PESQUISA', size=(20, 1)), sg.Button('CONFIRMAR', size= detalhes['sizeBotão'])]

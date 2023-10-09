@@ -1,13 +1,13 @@
 Lista de Afazeres no Projeto:
 [Check] - Popup de Crétidos
-- Adicionar Voltar nas telas
+[Check] - Adicionar Voltar nas telas (conferir)
 - Adicionar um log de informações e alterações com data e hora, arquivo separado.
 - Tela de Perfil
 - Terminar a Tela de Login
 [Check] - Seperar todas as funções do backend e interface
 [Check] - Resolver todas as importações nos arquivos de cada função
 [Check] - Terminar a Tela de Consulta
-- Função de resetar toda a matriz (Tela_Deletar)
+- Função de resetar toda a matriz (Tela_Deletar) e melhorar o desing da tela
 [Check] - Corrigir o loop das telas e como elas funcionam
 [Check] - Padronizar essas infos nos arquivos:
         | cor_FundoObjs;

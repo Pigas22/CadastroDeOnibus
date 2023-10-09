@@ -17,26 +17,20 @@ def Tela_Alterar(matriz, Id_User):
         'destino', 
         'Passsageiro'
     ]
-
-    col1 = [
-        [sg.Text('Informe a linha:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])],
-        [sg.InputCombo(values=tamanho_matriz, size=(10, 1), key='ID_linha')]
-    ]
-
-    col2 = [
-        [sg.Text('Informe a coluna:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])],
-        [sg.InputCombo(values=lista_colunas, size=(10, 1), key='ID_coluna')]
-    ]
   
 
     tabela_teste = [[sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PASSAGEIROS'], justification='left', key='tabela', enable_click_events=True)]]
 
     frame_teste = [
         [sg.Frame('Informações',  [
-            [sg.Column(col1, element_justification='c', background_color= detalhes['corFundo']), sg.VSep(), sg.Column(col2, element_justification='c', background_color= detalhes['corFundo'])],
+            [sg.Text('Informe a linha:  ', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.InputCombo(values=tamanho_matriz, size=(10, 1), key='ID_linha')],
+            
+            [sg.Text('Informe a coluna:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.InputCombo(values=lista_colunas, size=(10, 1), key='ID_coluna')],
+
             [sg.Text('  ', background_color= detalhes['corFundo'])],
+            
             [sg.Text('Novo Dado:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.Input(key='NOVO_DADO', size=(10, 1))],
-            [sg.Button('CONFIRMAR', size= detalhes['sizeBotão'])]
+            [sg.Button('Voltar', size= detalhes['sizeBotão']), sg.Button('Confirmar', size= detalhes['sizeBotão'])]
         ], background_color= detalhes['corFundo'], element_justification='c', title_location='n')]
     ]
   

@@ -32,6 +32,8 @@ matriz = []
 while True:
     window, evento, valor = sg.read_all_windows()
 
+
+
     if window == janelaCadastro:
         validacoes = 0
         
@@ -87,7 +89,7 @@ while True:
                     lacuna.update('')
 
     
-    elif window == janelaLogin: # Adicionar VoltarCadastro
+    elif window == janelaLogin:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaLogin.close()
             exit()
@@ -100,12 +102,12 @@ while True:
       
             if email_Login and senha_Login:
                 email_Valido = Verificar_Email.Verificar_Email(email_Login)
-                Id_User = email_Valido[1]
                 if email_Valido[0]:
                     Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
     
                 else:
-                    validacao += 1
+                    Id_User = email_Valido[1]
+                    validacao += 1    
     
                 senha_Valida = Verificar_Senha.Verificar_Senha(senha_Login, email_Login=email_Login)
                 if senha_Valida:
@@ -137,13 +139,12 @@ while True:
             janelaInicial.close()
             exit()
 
-    
-    elif window == janelaInserir: # Adicionar Voltar
+
+    elif window == janelaInserir:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
-            janelaInserir.close()
             exit()
       
-        if evento == 'Cadastrar':
+        elif evento == 'Cadastrar':
             motorista = valor['motorista']    
             linha = valor['linha']
             destino = valor['destino']
@@ -158,13 +159,13 @@ while True:
                 lacuna.update('')
 
 
-    elif window == janelaVerTudo: # Adicionar Voltar
+    elif window == janelaVerTudo:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaVerTudo.close()
             exit()
             
 
-    elif window == janelaDeletar: # Adicionar Voltar
+    elif window == janelaDeletar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaDeletar.close()
             exit()
@@ -174,13 +175,13 @@ while True:
             selected_id.update(evento[2][0])
             valor['ID'] = evento[2][0]
 
-        elif evento == 'CONFIRMAR' or evento == 'RESETAR MATRIZ':
-            if evento == 'CONFIRMAR':
+        elif evento == 'Confirmar' or evento == 'Resetar Matriz':
+            if evento == 'Confirmar':
                 id_do_registro = int(valor['ID'])
             
                 Deletar.Deletar(matriz, local_linha= id_do_registro)
 
-            elif evento == 'RESETAR MATRIZ':
+            elif evento == 'Resetar Matriz':
                 Deletar.Deletar(matriz, resetar= True)
 
             tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
@@ -192,8 +193,8 @@ while True:
             resp_delete = janelaDeletar['ID']
             resp_delete.update('')
     
-
-    elif window == janelaConsulta: # Adicionar Voltar
+    
+    elif window == janelaConsulta:
         filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
@@ -258,8 +259,8 @@ while True:
             tabela = janelaConsulta['tabela']
             tabela.update(values=tabela_comId)
 
-
-    elif window == janelaAlterar: # Adicionar Voltar
+    
+    elif window == janelaAlterar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaAlterar.close()
             janelaInicial = Tela_Inicial(Id_User)
@@ -275,7 +276,7 @@ while True:
             valor['ID_linha'] = evento[2][0]
             valor['ID_coluna'] = Colunas_Inversa.colunas_inversa[str(evento[2][1])]
       
-        elif evento == 'CONFIRMAR':
+        elif evento == 'Confirmar':
             ID_linha = valor['ID_linha']
             ID_coluna = valor['ID_coluna']
             new_dado = valor['NOVO_DADO']
@@ -308,7 +309,7 @@ while True:
         elif evento == 'Ver Tudo' or evento == 'VER TUDO':
             janelaVerTudo = Tela_VerTudo(matriz, Id_User)
 
-        elif evento == 'Deletar' or evento == 'Deletar':
+        elif evento == 'Deletar' or evento == 'DELETAR':
             janelaDeletar = Tela_Deletar(matriz, Id_User)
 
         elif evento == 'Consult Específica' or evento == 'CONSULTA ESPECÍFICA':
