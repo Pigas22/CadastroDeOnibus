@@ -32,8 +32,6 @@ matriz = []
 while True:
     window, evento, valor = sg.read_all_windows()
 
-
-
     if window == janelaCadastro:
         validacoes = 0
         
@@ -45,7 +43,7 @@ while True:
             janelaCadastro.close()
             janelaLogin = Tela_Login()
 
-        elif evento == 'Salvar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
+        elif evento == 'Cadastrar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
             nome_Completo = valor['Nome_Completo'] 
             email = valor['Email']
             senha_Principal = valor['Senha_Principal']

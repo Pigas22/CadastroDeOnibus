@@ -1,7 +1,9 @@
 def Deletar(matriz, local_linha='', resetar=False):
     if resetar:
         # reseta toda a matriz
-        matriz = []
+        matriz = [
+            []
+        ]
 
         return 'Todos os dados foram apagados.'
 

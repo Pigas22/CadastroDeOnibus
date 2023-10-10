@@ -20,4 +20,4 @@ def Tela_Login(): # Não terminado
         [sg.Button('Voltar', size= detalhes['sizeBotão'], key='VoltarCadastro'), sg.Button('Fazer Login', size= detalhes['sizeBotão'])]
     ]
 
-    return sg.Window('Login', layout, background_color= detalhes['corFundo'], element_justification= 'c', size= (310, 325), return_keyboard_events= True, finalize= True)
+    return sg.Window('Login', layout, background_color= detalhes['corFundo'], element_justification= 'c', size= (310, 330), return_keyboard_events= True, finalize= True)

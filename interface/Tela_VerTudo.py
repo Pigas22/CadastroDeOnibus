@@ -19,4 +19,4 @@ def Tela_VerTudo(matriz, Id_User):
         [sg.Column(col1, element_justification= 'left', background_color= detalhes['corFundo'])]
     ]
 
-    return sg.Window('VER TUDO', layout_verTudo, background_color= detalhes['corFundo'], finalize= True, size= (600, 250))
+    return sg.Window('VER TUDO', layout_verTudo, background_color= detalhes['corFundo'], finalize= True, size= (500, 350))
