@@ -78,7 +78,7 @@ class Usuario():
         return self.__senha2
 
     def setLoginSenhaUser(self, loginSenha_User):
-        self.__loginSenha = loginSenha_User
+        self.__loginSenha = self.__encriptadorSenhas(loginSenha_User)
 
     def getLoginSenhaUser(self):
         return self.__loginSenha
