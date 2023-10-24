@@ -3,7 +3,7 @@ def Consulta_Espec(matriz, local_linha=''):
         A função retornará uma linha inteira.
 
         Exemplo:
-            print(consulta_espec(matriz, 3,)) == [26, 27, 28, 29, 30]
+            print(consulta_espec(matriz, 3)) == [26, 27, 28, 29, 30]
     """
     
     try:

@@ -1,6 +1,7 @@
 import PySimpleGUI as sg
 from backend import Colunas_Inversa
-from backend.Funcoes import Verificar_Email, Verificar_Senha, Salvar_Contas, Salvar_Matriz, Inicializar, Inserir, Deletar, Alterar_Dado
+from backend.Funcoes import Salvar_Matriz, Inicializar, Inserir, Deletar, Alterar_Dado
+from backend.Funcoes.Usuario import Usuario
 from interface.Tela_Cadastro import Tela_Cadastro
 from interface.Tela_Login import Tela_Login
 from interface.Tela_Inicial import Tela_Inicial
@@ -27,6 +28,8 @@ janelaPerfilUser = None
 popupCreditos = None
 popupPadrao = None
 
+user = Usuario()
+
 matriz = []
 
 while True:
@@ -44,13 +47,13 @@ while True:
             janelaLogin = Tela_Login()
 
         elif evento == 'Cadastrar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
-            nome_Completo = valor['Nome_Completo'] 
-            email = valor['Email']
-            senha_Principal = valor['Senha_Principal']
-            senha_Confirmacao = valor['Senha_Confirmação']
+            user.setNomeUser(valor['Nome_Completo'])
+            user.setEmailUser(valor['Email'])
+            user.setSenha1User(valor['Senha_Principal'])
+            user.setSenha2User(valor['Senha_Confirmação'])
             
-            email_valido = Verificar_Email.Verificar_Email(email)
-            senha_valida = Verificar_Senha.Verificar_Senha(senha_Principal, senha_Confirmacao)
+            email_valido = user.verificarEmail()
+            senha_valida = user.verificarSenha()
 
             if senha_valida and email_valido: 
                 # varifica a senha e o email se estao devidamente corretos
@@ -67,17 +70,18 @@ while True:
                     linhas = len(arquivo.readlines())
                 arquivo.close()
 
-                Id_User = linhas + 1 
-
+                user.setIdUser(linhas + 1 )
+                Id_User = user.getIdUser()
+                
                 with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
                     arquivo.close()
 
-                Salvar_Contas.Salvar_Contas(Id_User, nome_Completo, email, senha_Principal)
+                user.salvarConta()
                
                 Popup_Padrao('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
         
                 janelaCadastro.close()
-                matriz = Inicializar.Inicializar(Id_User)
+                matriz = Inicializar.Inicializar(Id_User) # olhar se precisa de parametro
                 janelaInicial = Tela_Inicial(Id_User)
                 
 
@@ -95,19 +99,21 @@ while True:
         elif evento == 'Fazer Login' or evento == 'KP_Enter:104' or evento == 'Return:36':
             validacao = 0
 
-            email_Login = valor['Email_Login']
-            senha_Login = valor['Senha_Login']
+            user.setLoginEmailUser(valor['Email_Login'])
+            user.setLoginSenhaUser(valor['Senha_Login'])
       
-            if email_Login and senha_Login:
-                email_Valido = Verificar_Email.Verificar_Email(email_Login)
-                if email_Valido[0]:
-                    Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
+            if user.getLoginEmailUser() != "" and user.getLoginSenhaUser() != "":
+                user.verificarEmail()
+                email_Valido = user.getEmailVerificado()
     
-                else:
-                    Id_User = email_Valido[1]
+                if email_Valido:
+                    Id_User = user.getIdUser()
                     validacao += 1    
     
-                senha_Valida = Verificar_Senha.Verificar_Senha(senha_Login, email_Login=email_Login)
+                else:
+                    Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
+                    
+                senha_Valida = user.getSenhaVerificada()
                 if senha_Valida:
                     validacao += 1
     
@@ -118,6 +124,7 @@ while True:
                 if validacao == 2:
                     Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
                     janelaLogin.close()
+                    
                     matriz = Inicializar.Inicializar(Id_User)
                     janelaInicial = Tela_Inicial(Id_User)
               
