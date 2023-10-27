@@ -35,7 +35,7 @@ def Tela_Cadastro():
         [sg.Column(col1, background_color=detalhes['corFundo']), sg.Column(col2, background_color=detalhes['corFundo'])],
         [sg.Column(col3, background_color=detalhes['corFundo']), sg.Column(col4, background_color=detalhes['corFundo'])],
         [sg.Frame('Obs: ', [[sg.Text('As senhas devem conter números e caracteres especiais, \ncomo: ! @ # $ %', background_color=detalhes['corFundo'])]], background_color=detalhes['corFundo'])],
-        [sg.Button('Limpar', size= detalhes['sizeBotão']), sg.Button('Login...', size= detalhes['sizeBotão']), sg.Button('Cadastrar Dados', size= detalhes['sizeBotão'])]
+        [sg.Button('Limpar', size= detalhes['sizeBotão']), sg.Button('Login...', size= detalhes['sizeBotão']), sg.Button('Cadastrar Dados', size=(15, 1))]
     ]
 
-    return sg.Window('Cadastro', layout, background_color= detalhes['corFundo'], element_justification= 'c', size = (500, 400), return_keyboard_events= True, finalize= True)
+    return sg.Window('Cadastro', layout, background_color= detalhes['corFundo'], element_justification= 'c', size = (500, 405), return_keyboard_events= True, finalize= True)

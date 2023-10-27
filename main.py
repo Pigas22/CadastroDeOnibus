@@ -1,6 +1,6 @@
 import PySimpleGUI as sg
 from backend import Colunas_Inversa
-from backend.Funcoes import Salvar_Matriz, Inicializar, Inserir, Deletar, Alterar_Dado
+from backend.Funcoes.Matriz import Matriz
 from backend.Funcoes.Usuario import Usuario
 from interface.Tela_Cadastro import Tela_Cadastro
 from interface.Tela_Login import Tela_Login
@@ -29,8 +29,7 @@ popupCreditos = None
 popupPadrao = None
 
 user = Usuario()
-
-matriz = []
+matriz = Matriz()
 
 while True:
     window, evento, valor = sg.read_all_windows()
@@ -42,28 +41,33 @@ while True:
             janelaCadastro.close()
             exit()
 
-        elif evento == 'Login' or evento == 'Login...':
-            janelaCadastro.close()
-            janelaLogin = Tela_Login()
-
         elif evento == 'Cadastrar Dados' or evento == 'KP_Enter:104' or evento == 'Return:36':
             user.setNomeUser(valor['Nome_Completo'])
             user.setEmailUser(valor['Email'])
             user.setSenha1User(valor['Senha_Principal'])
             user.setSenha2User(valor['Senha_Confirmação'])
             
-            email_valido = user.verificarEmail()
-            senha_valida = user.verificarSenha()
+            user.verificarSenha()
+            user.verificarEmail()
+            
+            email_valido = user.getEmailVerificado()
+            senha_valida = user.getSenhaVerificada()
+            
 
-            if senha_valida and email_valido: 
+            if (senha_valida and email_valido) and (user.getSenha1User() != '' and user.getSenha2User() != '' and user.getEmailUser() != ''): 
                 # varifica a senha e o email se estao devidamente corretos
                 validacoes += 2
 
-            elif not email_valido:
-                Popup_Padrao('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.')
+            elif not email_valido and user.getEmailUser() != '':
+                Popup_Padrao('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.')    
+            elif user.getEmailUser() == '':
+                Popup_Padrao('Email não informado!', 'Por favor, informe um email para continuar.')
       
-            elif not senha_valida:
-                Popup_Padrao('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.')
+            elif not senha_valida and user.getSenha1User() != '':
+                Popup_Padrao('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.')   
+            elif user.getSenha1User() == '' or user.getSenha2User() == '':
+                Popup_Padrao('Senha não informada!', 'Por favor, informe uma senha para continuar.')
+                
 
             if validacoes == 2:
                 with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo:
@@ -72,17 +76,27 @@ while True:
 
                 user.setIdUser(linhas + 1 )
                 Id_User = user.getIdUser()
+                Matriz.setIdUserMatriz()
                 
-                with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
-                    arquivo.close()
+                try:
+                    salvo = user.salvarConta()
 
-                user.salvarConta()
-               
-                Popup_Padrao('Conta criada com sucesso!!', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
+                except Exception:
+                    Popup_Padrao('ERROR!!', 'Aconteceu algum erro ao salvar sua conta, tente novamente.')
+                    
+
+                else:
+                    with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
+                        arquivo.close()
+    
+                    Popup_Padrao(f'{salvo}', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
         
-                janelaCadastro.close()
-                matriz = Inicializar.Inicializar(Id_User) # olhar se precisa de parametro
-                janelaInicial = Tela_Inicial(Id_User)
+                    janelaCadastro.close()
+                    
+                    matriz.Inicializar()
+                    janelaInicial = Tela_Inicial(Id_User)
+
+
                 
 
             elif evento == 'Limpar':
@@ -104,15 +118,17 @@ while True:
       
             if user.getLoginEmailUser() != "" and user.getLoginSenhaUser() != "":
                 user.verificarEmail()
-                email_Valido = user.getEmailVerificado()
+                email_Existe = not user.getEmailVerificado() # Se o email existir retorna False, caso contrário, True
     
-                if email_Valido:
+                if email_Existe:
                     Id_User = user.getIdUser()
+                    matriz.setIdUserMatriz()
                     validacao += 1    
     
                 else:
                     Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
                     
+                user.verificarSenha()
                 senha_Valida = user.getSenhaVerificada()
                 if senha_Valida:
                     validacao += 1
@@ -125,7 +141,7 @@ while True:
                     Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
                     janelaLogin.close()
                     
-                    matriz = Inicializar.Inicializar(Id_User)
+                    matriz.Inicializar()
                     janelaInicial = Tela_Inicial(Id_User)
               
     
@@ -155,7 +171,7 @@ while True:
             destino = valor['destino']
             quant_passageiros = valor['N° de PASSAGEIROS']
     
-            Inserir.Inserir(matriz, motorista, linha, destino, quant_passageiros)
+            matriz.Inserir(motorista, linha, destino, quant_passageiros)
 
             Popup_Padrao('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".')
 
@@ -184,12 +200,12 @@ while True:
             if evento == 'Confirmar':
                 id_do_registro = int(valor['ID'])
             
-                Deletar.Deletar(matriz, local_linha= id_do_registro)
+                matriz.Deletar(local_linha= id_do_registro)
 
             elif evento == 'Resetar Matriz':
-                Deletar.Deletar(matriz, resetar= True)
+                matriz.Deletar(resetar= True)
 
-            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
+            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
             
             tabela = janelaDeletar['tabela_atual']
             tabela.update(values=tabela_comId)
@@ -221,13 +237,13 @@ while True:
                 
                 if filtro == 'id':
                     try:
-                        matriz_Pesquisa.append(matriz[int(chave_pesquisa)])
+                        matriz_Pesquisa.append(matriz.getMatriz()[int(chave_pesquisa)])
 
                     except ValueError:
                         Popup_Padrao('Error:', 'Informe apenas o ID do Ônibus')
     
                 else:
-                    for linha in matriz:
+                    for linha in matriz.getMatriz():
                         if linha[filtro] == chave_pesquisa:
                             matriz_Pesquisa.append(linha)
 
@@ -260,7 +276,7 @@ while True:
                 filtro = 3
 
         elif evento == 'MATRIZ_ORIGINAL':
-            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
+            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
             tabela = janelaConsulta['tabela']
             tabela.update(values=tabela_comId)
 
@@ -286,10 +302,10 @@ while True:
             ID_coluna = valor['ID_coluna']
             new_dado = valor['NOVO_DADO']
       
-            Alterar_Dado.Alterar_Dado(matriz, ID_linha, ID_coluna, new_dado)
-            Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
+            matriz.Alterar_Dado(ID_linha, ID_coluna, new_dado)
+            matriz.Salvar_Matriz()
       
-            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz)]
+            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
             tabela = janelaAlterar['tabela']
             tabela.update(values=tabela_comId)
       
@@ -308,23 +324,26 @@ while True:
         elif evento == 'Cadastro' or evento == 'VoltarCadastro':
             janelaCadastro = Tela_Cadastro()
 
+        elif evento == 'Login' or evento == 'Login...':
+            janelaLogin = Tela_Login()
+
         elif evento == 'Inserir' or evento == 'INSERIR':
-            janelaInserir = Tela_Inserir(matriz, Id_User)
+            janelaInserir = Tela_Inserir(matriz.getMatriz(), Id_User)
         
         elif evento == 'Ver Tudo' or evento == 'VER TUDO':
-            janelaVerTudo = Tela_VerTudo(matriz, Id_User)
+            janelaVerTudo = Tela_VerTudo(matriz.getMatriz(), Id_User)
 
         elif evento == 'Deletar' or evento == 'DELETAR':
-            janelaDeletar = Tela_Deletar(matriz, Id_User)
+            janelaDeletar = Tela_Deletar(matriz.getMatriz(), Id_User)
 
         elif evento == 'Consult Específica' or evento == 'CONSULTA ESPECÍFICA':
-            janelaConsulta = Tela_Consulta(matriz, Id_User)
+            janelaConsulta = Tela_Consulta(matriz.getMatriz(), Id_User)
             
         elif evento == 'Alterar' or evento == 'ALTERAR':
-            janelaAlterar = Tela_Alterar(matriz, Id_User)
+            janelaAlterar = Tela_Alterar(matriz.getMatriz(), Id_User)
 
         elif evento == 'Sobre...':
             Popup_Creditos()
         
-        if evento != 'Sobre...' and evento != 'Cadastro' and evento != 'VoltarCadastro':
-            Salvar_Matriz.Salvar_Matriz(matriz, Id_User)
+        if (evento != 'Sobre...') and (evento not in ['Cadastro', 'VoltarCadastro']) and (evento not in ['Login', 'Login...']):
+            matriz.Salvar_Matriz()

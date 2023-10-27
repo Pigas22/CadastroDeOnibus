@@ -58,11 +58,13 @@ class Usuario():
                 self.setIdUser(conta.split()[0])
                 if email in conta:
                     self.setEmailVerificado(False)
+                    break
 
-            self.setEmailVerificado(False)
+                else:
+                    self.setEmailVerificado(True)
 
         else:
-            self.setEmailVerificado(False)
+            self.setEmailVerificado(True)
 
     # Senhas
     def setSenha1User(self, senha1_User):
@@ -94,16 +96,19 @@ class Usuario():
         numeros = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
         pontos = [' ', '!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',',  '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', ']', '^', '_', '`', '{', '|', '}', '~']
 
-        email_Login = user.getLoginEmailUser()
+        email_Login = self.getLoginEmailUser()
         if email_Login != '': # Login
             with open("backend/BD_Contas/Todas_Contas.txt", 'r') as arquivo:
                 linhas = arquivo.readlines()
             arquivo.close()
 
-            for todas_Contas in linhas:
-                for conta in todas_Contas:                        
-                    if self.getLoginSenhaUser() in conta:
-                        self.setSenhaVerificada(True)
+            for conta in linhas:
+                if self.getLoginSenhaUser() in conta and email_Login in conta:
+                    self.setSenhaVerificada(True)
+                    break
+
+                else:
+                    self.setSenhaVerificada(False)
 
         else:
             senha_Principal = self.getSenha1User() 
@@ -123,10 +128,10 @@ class Usuario():
                         break
 
             if validacoes == 3:
-                user.setSenhaVerificada(True)
+                self.setSenhaVerificada(True)
     
             else:
-                user.setSenhaVerificada(False)
+                self.setSenhaVerificada(False)
                 
 
     def __encriptadorSenhas(self, senha):
@@ -172,22 +177,11 @@ class Usuario():
 
         with open('backend/BD_Contas/Todas_Contas.txt', 'a') as arquivo_Contas2:
             if linhas:
-                arquivo_Contas2.write(f'\n{self.getIdUser()} {nome_Completo} {self.getEmailUser()} {self.getSenhaUser()}')
+                arquivo_Contas2.write(f'\n{self.getIdUser()} {nome_Completo} {self.getEmailUser()} {self.getSenha1User()}')
 
             else:
-                arquivo_Contas2.write(f'{self.getIdUser()} {nome_Completo} {self.getEmailUser()} {self.getSenhaUser()}')
+                arquivo_Contas2.write(f'{self.getIdUser()} {nome_Completo} {self.getEmailUser()} {self.getSenha1User()}')
 
         arquivo_Contas2.close()
 
-        return 'Conta salva com sucesso!'
-
-
-if __name__ == "__main__":
-    user = Usuario()
-
-    user.setIdUser(2684)
-    user.setNomeUser("João Augusto")
-    user.setEmailUser("joao@gmail.com")
-    user.setSenhaUser("aspaifja")
-    
-    user.salvarConta()
+        return 'Conta salva com sucesso!!'
