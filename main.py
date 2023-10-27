@@ -60,15 +60,17 @@ while True:
 
             elif not email_valido and user.getEmailUser() != '':
                 Popup_Padrao('Email já cadastrado anteriormente!', 'O email informado já está vinculado a uma conta, por favor, informe outro endereço de email ou logue na conta.')    
+            
             elif user.getEmailUser() == '':
                 Popup_Padrao('Email não informado!', 'Por favor, informe um email para continuar.')
       
             elif not senha_valida and user.getSenha1User() != '':
                 Popup_Padrao('Senha incorreta!', 'As senhas informadas não coincidem ou A senha está fraca. \n| As senhas devem conter números e caracteres especiais, como: ! @ # ( : *.')   
+            
             elif user.getSenha1User() == '' or user.getSenha2User() == '':
                 Popup_Padrao('Senha não informada!', 'Por favor, informe uma senha para continuar.')
                 
-
+            print(validacoes)
             if validacoes == 2:
                 with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo:
                     linhas = len(arquivo.readlines())
@@ -76,14 +78,13 @@ while True:
 
                 user.setIdUser(linhas + 1 )
                 Id_User = user.getIdUser()
-                Matriz.setIdUserMatriz()
+                matriz.setIdUserMatriz()
                 
                 try:
                     salvo = user.salvarConta()
 
                 except Exception:
                     Popup_Padrao('ERROR!!', 'Aconteceu algum erro ao salvar sua conta, tente novamente.')
-                    
 
                 else:
                     with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
