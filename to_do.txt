@@ -1,23 +1,28 @@
-Lista de Afazeres no Projeto:
-[Check] - Popup de Crétidos
-[Check] - Adicionar Voltar nas telas (conferir)
-[Check] - Criar uma classe para o Usuario e implementar as alterações necessárias
-[para Teste] - Criar uma classe para a Matriz e impletmentar as alterações necessárias
-- Ver a diferença de manter o Id_User no main.py ou atribui-lo na classe Usuario
-- Adicionar um log de informações e alterações com data e hora, arquivo separado.
-- Tela de Perfil
-- Terminar a Tela de Login
-[Check] - Seperar todas as funções do backend e interface
-[Check] - Resolver todas as importações nos arquivos de cada função
-[Check] - Terminar a Tela de Consulta
-- Função de resetar toda a matriz (Tela_Deletar) e melhorar o desing da tela
-[Check] - Corrigir o loop das telas e como elas funcionam
-[Check] - Padronizar essas infos nos arquivos:
-        | cor_FundoObjs;
-        | tema;
-        | fonte;
-        | tamanho_Fonte;
-        | cor_Texto.
-- Revisar cada Função e arquivo do Programa(POR ÚLTIMO)
+========== Lista de Afazeres no Projeto: ==========
 
-Parada: tratamento de erro no "main.py" na parte da tela de Cadastro.
+Itens a serem feitos:
+        - Verificar erro ao logar na conta
+        - Função de resetar toda a matriz (Tela_Deletar) e melhorar o desing da tela
+        - Adicionar um log de informações e alterações com data e hora, arquivo separado.
+        - Tela de Perfil
+
+Itens Feitos:
+        [Check] - Terminar a Tela de Login e modificar seu layout
+        [Check] - Popup de Crétidos
+        [Check] - Adicionar Voltar nas telas (conferir)
+        [Check] - Criar uma classe para o Usuario e implementar as alterações necessárias
+        [Check] - Criar uma classe para a Matriz e impletmentar as alterações necessárias
+        [Check] - Ver a diferença de manter o Id_User no main.py ou atribui-lo na classe Usuario
+        [Check] - Seperar todas as funções do backend e interface
+        [Check] - Resolver todas as importações nos arquivos de cada função
+        [Check] - Terminar a Tela de Consulta
+        [Check] - Corrigir o loop das telas e como elas funcionam
+        [Check] - Padronizar essas infos nos arquivos:
+                | cor_FundoObjs;
+                | tema;
+                | fonte;
+                | tamanho_Fonte;
+                | cor_Texto.
+
+Itens de revisão final:
+        - Revisar cada Função e arquivo do Programa(POR ÚLTIMO)

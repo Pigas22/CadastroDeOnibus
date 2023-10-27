@@ -28,11 +28,16 @@ janelaPerfilUser = None
 popupCreditos = None
 popupPadrao = None
 
+mostrar = False
+
 user = Usuario()
 matriz = Matriz()
 
 while True:
     window, evento, valor = sg.read_all_windows()
+
+    print('EVENTOS: ', evento)
+    print('VALORES: ', valor)
 
     if window == janelaCadastro:
         validacoes = 0
@@ -52,7 +57,6 @@ while True:
             
             email_valido = user.getEmailVerificado()
             senha_valida = user.getSenhaVerificada()
-            
 
             if (senha_valida and email_valido) and (user.getSenha1User() != '' and user.getSenha2User() != '' and user.getEmailUser() != ''): 
                 # varifica a senha e o email se estao devidamente corretos
@@ -70,7 +74,7 @@ while True:
             elif user.getSenha1User() == '' or user.getSenha2User() == '':
                 Popup_Padrao('Senha não informada!', 'Por favor, informe uma senha para continuar.')
                 
-            print(validacoes)
+
             if validacoes == 2:
                 with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo:
                     linhas = len(arquivo.readlines())
@@ -78,27 +82,25 @@ while True:
 
                 user.setIdUser(linhas + 1 )
                 Id_User = user.getIdUser()
-                matriz.setIdUserMatriz()
+                matriz.setIdUserMatriz(Id_User) # não está passando daqui
+                
                 
                 try:
                     salvo = user.salvarConta()
+                    Popup_Padrao(f'{salvo}', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
 
-                except Exception:
+                except Exception as error:
                     Popup_Padrao('ERROR!!', 'Aconteceu algum erro ao salvar sua conta, tente novamente.')
 
                 else:
-                    with open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') as arquivo:
-                        arquivo.close()
-    
-                    Popup_Padrao(f'{salvo}', 'Parabéns, agora você pode utilizar o programa com sua conta e ter seus dados salvos.')
+                    arquivo = open(f'backend/BD_Dados/Usuario{Id_User}_Dados.txt', 'xt') # criando arquivo
+                    arquivo.close()
         
                     janelaCadastro.close()
                     
                     matriz.Inicializar()
                     janelaInicial = Tela_Inicial(Id_User)
 
-
-                
 
             elif evento == 'Limpar':
                 lacunas = [janelaCadastro['Nome_Completo'], janelaCadastro['Email'], janelaCadastro['Senha_Principal'], janelaCadastro['Senha_Confirmação']]
@@ -123,7 +125,7 @@ while True:
     
                 if email_Existe:
                     Id_User = user.getIdUser()
-                    matriz.setIdUserMatriz()
+                    matriz.setIdUserMatriz(Id_User)
                     validacao += 1    
     
                 else:
@@ -149,11 +151,21 @@ while True:
             else:
                 Popup_Padrao('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
 
-        elif evento == 'LimparEmail':
-            janelaLogin['Email_Login'].update('')
+        
+        elif evento == 'VerSenha' and mostrar:
+            print("entrou aqui")
+            mostrar = False
 
-        elif evento == 'LimparSenha':
-            janelaLogin['Senha_Login'].update('')
+            janelaLogin['VerSenha'].update(image_filename= r'interface/olho aberto.png', image_subsample= 20)
+            janelaLogin['Senha_Login'].update(password_char= '*')
+        
+        
+        elif evento == 'VerSenha' and not mostrar:
+            mostrar = True
+    
+            janelaLogin['VerSenha'].update(image_filename= r'interface/olho fechado.png', image_subsample= 20)
+            janelaLogin['Senha_Login'].update(password_char= '')
+        
 
     
     elif window == janelaInicial:
@@ -337,7 +349,7 @@ while True:
         elif evento == 'Deletar' or evento == 'DELETAR':
             janelaDeletar = Tela_Deletar(matriz.getMatriz(), Id_User)
 
-        elif evento == 'Consult Específica' or evento == 'CONSULTA ESPECÍFICA':
+        elif evento == 'Consulta Específica' or evento == 'CONSULTA ESPECÍFICA':
             janelaConsulta = Tela_Consulta(matriz.getMatriz(), Id_User)
             
         elif evento == 'Alterar' or evento == 'ALTERAR':

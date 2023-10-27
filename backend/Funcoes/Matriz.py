@@ -4,10 +4,8 @@ class Matriz():
 
 
     # Puxa o id do usuario
-    def setIdUserMatriz(self):
-        from main import user
-        
-        self.__Id_User = user.getIdUser()
+    def setIdUserMatriz(self, Id_User):
+        self.__Id_User = Id_User
 
     
     # Inicializar matriz

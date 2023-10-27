@@ -11,10 +11,10 @@ def Tela_Inserir(matriz, Id_User):
                  background_color= detalhes['corFundo'], 
                  text_color= detalhes['corTexto'])
         ],
-        [sg.Text('MOTORISTA:', size = (15, 1), background_color=detalhes['corFundo']), sg.Input(key='motorista', background_color='White', text_color= detalhes['corTexto'])],
-        [sg.Text('LINHA ÔNIBUS:', size=(15,1), background_color=detalhes['corFundo']), sg.Input(key='linha', background_color='White', text_color= detalhes['corTexto'])],
-        [sg.Text('DESTINO:', size=(15, 1), background_color=detalhes['corFundo']), sg.Input(key='destino',background_color='white', text_color= detalhes['corTexto'])],
-        [sg.Text('N° de PASSAGEIROS:', size=(15, 1), background_color=detalhes['corFundo']), sg.Input(key='N° de PASSAGEIROS', background_color='white', text_color= detalhes['corTexto'])],
+        [sg.Text('MOTORISTA:', size = (15, 1), background_color=detalhes['corFundo']), sg.Input(key='motorista', background_color='White', text_color= 'Black')],
+        [sg.Text('LINHA ÔNIBUS:', size=(15,1), background_color=detalhes['corFundo']), sg.Input(key='linha', background_color='White', text_color= 'Black')],
+        [sg.Text('DESTINO:', size=(15, 1), background_color=detalhes['corFundo']), sg.Input(key='destino',background_color='white', text_color= 'Black')],
+        [sg.Text('N° de PASSAGEIROS:', size=(15, 1), background_color=detalhes['corFundo']), sg.Input(key='N° de PASSAGEIROS', background_color='white', text_color= 'Black')],
         [sg.Button('Voltar', size= detalhes['sizeBotão']), sg.Button('Cadastrar', size= detalhes['sizeBotão'])]
     ]
   
