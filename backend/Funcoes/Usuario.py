@@ -31,6 +31,8 @@ class Usuario():
     def setEmailUser(self, email_User):
         self.__email = email_User
 
+            
+
     def getEmailUser(self):
         return self.__email
         
@@ -47,24 +49,29 @@ class Usuario():
         return self.__emailVerificado
         
     def verificarEmail(self): # Fazer tratamento de erro
+        from interface.Popup_Padrao import Popup_Padrao
         email = self.getEmailUser()
-        
-        with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_emails:
-            linhas = arquivo_emails.readlines()
-        arquivo_emails.close()
 
-        if linhas:
-            for conta in linhas:
-                self.setIdUser(conta.split()[0])
-                if email in conta:
-                    self.setEmailVerificado(False)
-                    break
-
-                else:
-                    self.setEmailVerificado(True)
+        if email.find("@") != -1 and email != '':
+            with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_emails:
+                linhas = arquivo_emails.readlines()
+            arquivo_emails.close()
+    
+            if linhas:
+                for conta in linhas:
+                    self.setIdUser(conta.split()[0])
+                    if email in conta:
+                        self.setEmailVerificado(False)
+                        break
+    
+                    else:
+                        self.setEmailVerificado(True)
+    
+            else:
+                self.setEmailVerificado(True)
 
         else:
-            self.setEmailVerificado(True)
+            Popup_Padrao("ERROR: Email Inválido" , "Por favor, digite um email válido.")
 
     # Senhas
     def setSenha1User(self, senha1_User):

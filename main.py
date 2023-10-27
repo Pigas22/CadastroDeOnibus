@@ -76,7 +76,7 @@ while True:
 
                 user.setIdUser(linhas + 1 )
                 Id_User = user.getIdUser()
-                Matriz.setIdUserMatriz()
+                matriz.setIdUserMatriz()
                 
                 try:
                     salvo = user.salvarConta()
