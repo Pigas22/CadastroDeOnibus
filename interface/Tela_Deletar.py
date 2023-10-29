@@ -12,7 +12,7 @@ def Tela_Deletar(matriz, Id_User): # à modificar
     ]
 
     col_Botao = [
-        [sg.Button('Resetar Matriz', size= (12, 1)), sg.Button('Confirmar', size= detalhes['sizeBotão'])]
+        [sg.Button('Resetar Matriz', size= (12, 1)), sg.Button('Deletar Dado', size= detalhes['sizeBotão'])]
     ]
 
     layoutFrame = [

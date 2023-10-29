@@ -51,8 +51,9 @@ class Usuario():
     def verificarEmail(self): # Fazer tratamento de erro
         from interface.Popup_Padrao import Popup_Padrao
         email = self.getEmailUser()
+        email_Login = self.getLoginEmailUser()
 
-        if email.find("@") != -1 and email != '':
+        if (email.find("@") != -1 and email != '') or (email_Login.find("@") != -1 and email_Login != ''):
             with open('backend/BD_Contas/Todas_Contas.txt', 'r') as arquivo_emails:
                 linhas = arquivo_emails.readlines()
             arquivo_emails.close()
@@ -60,13 +61,25 @@ class Usuario():
             if linhas:
                 for conta in linhas:
                     self.setIdUser(conta.split()[0])
-                    if email in conta:
-                        self.setEmailVerificado(False)
-                        break
-    
+
+                    # Cadastro
+                    if email_Login == '':
+                        if email in conta:
+                            self.setEmailVerificado(False)
+                            break
+
+                        else:
+                            self.setEmailVerificado(True)
+
+                    # Login
                     else:
-                        self.setEmailVerificado(True)
-    
+                        if email_Login in conta:
+                            self.setEmailVerificado(True)
+                            break
+
+                        else:
+                            self.setEmailVerificado(False)
+
             else:
                 self.setEmailVerificado(True)
 

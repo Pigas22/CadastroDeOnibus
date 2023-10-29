@@ -1,12 +1,12 @@
 ========== Lista de Afazeres no Projeto: ==========
 
 Itens a serem feitos:
-        - Verificar erro ao logar na conta
-        - Função de resetar toda a matriz (Tela_Deletar) e melhorar o desing da tela
         - Adicionar um log de informações e alterações com data e hora, arquivo separado.
         - Tela de Perfil
 
 Itens Feitos:
+        [Check] - Função de resetar toda a matriz (Tela_Deletar) e melhorar o desing da tela
+        [Check] - Verificar erro ao logar na conta
         [Check] - Terminar a Tela de Login e modificar seu layout
         [Check] - Popup de Crétidos
         [Check] - Adicionar Voltar nas telas (conferir)

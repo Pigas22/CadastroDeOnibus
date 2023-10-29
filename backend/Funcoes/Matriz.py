@@ -1,6 +1,7 @@
 class Matriz():
     def __init__(self):
         self.__matriz = ''
+        self.__Id_User = 0
 
 
     # Puxa o id do usuario
@@ -9,7 +10,7 @@ class Matriz():
 
     
     # Inicializar matriz
-    def Inicializar(self):  
+    def Inicializar(self):
         with open(f'backend/BD_Dados/Usuario{self.__Id_User}_Dados.txt', 'rt') as arquivo:
             linhas = arquivo.readlines()
         arquivo.close()
@@ -45,6 +46,7 @@ class Matriz():
     def getMatriz(self):
         return self.__matriz
 
+
     # Inserir algo à Matriz
     def Inserir(self, motorista, linha, destino, quant_passageiros):
         matriz = self.getMatriz()
@@ -58,12 +60,13 @@ class Matriz():
  
 
     # Deleta uma linha na matriz ou ela inteira
-    def Deletar(self, local_linha='', resetar=False):
+    def Deletar(self, local_linha='', resetar= False):
         matriz = self.getMatriz()
+
         if resetar:
-            matriz = [
-                []
-            ]
+            for i in range(0, len(matriz)):
+                matriz.pop()
+
             return 'Todos os dados foram apagados.'
 
         elif local_linha != '' :

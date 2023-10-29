@@ -36,9 +36,6 @@ matriz = Matriz()
 while True:
     window, evento, valor = sg.read_all_windows()
 
-    print('EVENTOS: ', evento)
-    print('VALORES: ', valor)
-
     if window == janelaCadastro:
         validacoes = 0
         
@@ -121,24 +118,21 @@ while True:
       
             if user.getLoginEmailUser() != "" and user.getLoginSenhaUser() != "":
                 user.verificarEmail()
-                email_Existe = not user.getEmailVerificado() # Se o email existir retorna False, caso contrário, True
+                user.verificarSenha()
+
+                email_Existente = user.getEmailVerificado()
+                senha_Valida = user.getSenhaVerificada()
     
-                if email_Existe:
+                if email_Existente and  senha_Valida:
                     Id_User = user.getIdUser()
                     matriz.setIdUserMatriz(Id_User)
-                    validacao += 1    
+                    validacao += 2    
     
-                else:
-                    Popup_Padrao('Email incorreto!', 'O email informado não está vinculado à nenhuma conta')
-                    
-                user.verificarSenha()
-                senha_Valida = user.getSenhaVerificada()
-                if senha_Valida:
-                    validacao += 1
+                elif not email_Existente:
+                    Popup_Padrao('Email incorreto!', 'O email informado não à nenhuma conta vinculado.')
     
-                else:
+                elif not senha_Valida:
                     Popup_Padrao('Senha Incorreta!', 'Por favor, digite-a novamente.')
-              
     
                 if validacao == 2:
                     Popup_Padrao('Login Efetuado com Sucesso!', 'Aproveite o App.')
@@ -147,13 +141,11 @@ while True:
                     matriz.Inicializar()
                     janelaInicial = Tela_Inicial(Id_User)
               
-    
             else:
                 Popup_Padrao('Email e senha não informados!', 'Por favor, informe-os para efetuar o login.')
 
         
         elif evento == 'VerSenha' and mostrar:
-            print("entrou aqui")
             mostrar = False
 
             janelaLogin['VerSenha'].update(image_filename= r'interface/olho aberto.png', image_subsample= 20)
@@ -166,7 +158,6 @@ while True:
             janelaLogin['VerSenha'].update(image_filename= r'interface/olho fechado.png', image_subsample= 20)
             janelaLogin['Senha_Login'].update(password_char= '')
         
-
     
     elif window == janelaInicial:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
@@ -209,8 +200,8 @@ while True:
             selected_id.update(evento[2][0])
             valor['ID'] = evento[2][0]
 
-        elif evento == 'Confirmar' or evento == 'Resetar Matriz':
-            if evento == 'Confirmar':
+        elif evento == 'Deletar Dado' or evento == 'Resetar Matriz':
+            if evento == 'Deletar Dado':
                 id_do_registro = int(valor['ID'])
             
                 matriz.Deletar(local_linha= id_do_registro)
@@ -328,7 +319,7 @@ while True:
 
     
     if evento in op_menuBar:
-        if evento != 'Sair':
+        if evento != 'Sair' and evento != 'Sobre...':
             window.close()
         
         if evento == 'Menu Principal' or evento == 'Voltar':
