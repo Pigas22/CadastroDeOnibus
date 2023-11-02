@@ -1,4 +1,4 @@
-def Tela_Consulta(matriz, Id_User): # Ainda à modificar
+def Tela_Consulta(matriz): # Ainda à modificar
     import PySimpleGUI as sg
     from interface.Detalhes import detalhes
     
@@ -23,7 +23,7 @@ def Tela_Consulta(matriz, Id_User): # Ainda à modificar
             sg.Table(values = tabela_comId, headings=['ID','MOTORISTA', 'LINHA', 'DESTINO', 'N° DE PESSOAS'], justification='left', key='tabela')
         ],
         [
-            sg.Button('Voltar', size= detalhes['sizeBotão']),
+            sg.Button('Voltar', size= detalhes['sizeBotao']),
             sg.Checkbox('Mostrar tabela sem filtro', background_color= detalhes['corFundo'], text_color='White', font= detalhes['fonte'], enable_events=True, key='MATRIZ_ORIGINAL')
         ]
     ]
@@ -35,14 +35,14 @@ def Tela_Consulta(matriz, Id_User): # Ainda à modificar
         [sg.Text('', background_color= detalhes['corFundo'])],
         
         [sg.Text('| Informe o Dado Abaixo:',  background_color= detalhes['corFundo'], font=f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]}', text_color= detalhes['corTexto'])],
-        [sg.Input(key='KEY_PESQUISA', size=(20, 1)), sg.Button('CONFIRMAR', size= detalhes['sizeBotão'])]
+        [sg.Input(key='KEY_PESQUISA', size=(20, 1)), sg.Button('CONFIRMAR', size= detalhes['sizeBotao'])]
     ]
   
     layout_consulta = [
         [sg.Menu([
             ['Menu', ['Menu Principal', 'Sair']],
             ['Navegar', ['Inserir', 'Ver Tudo', 'Alterar', 'Deletar']],
-            ['Ajuda', ['Sobre...']]
+            ['Ajuda', ['Conta', 'Sobre...']]
         ], key='barra_menu', background_color= detalhes['corFundo'], text_color='Black')],   
         [
             sg.Column(layout_ColunaEsq, background_color= detalhes['corFundo'], element_justification='center'),

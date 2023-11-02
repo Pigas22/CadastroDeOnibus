@@ -1,4 +1,4 @@
-def Tela_Deletar(matriz, Id_User): # à modificar
+def Tela_Deletar(matriz): # à modificar
     import PySimpleGUI as sg
     from interface.Detalhes import detalhes
     
@@ -12,7 +12,7 @@ def Tela_Deletar(matriz, Id_User): # à modificar
     ]
 
     col_Botao = [
-        [sg.Button('Resetar Matriz', size= (12, 1)), sg.Button('Deletar Dado', size= detalhes['sizeBotão'])]
+        [sg.Button('Resetar Matriz', size= (12, 1)), sg.Button('Deletar Dado', size= detalhes['sizeBotao'])]
     ]
 
     layoutFrame = [
@@ -29,15 +29,15 @@ def Tela_Deletar(matriz, Id_User): # à modificar
     ]
 
     col3 = [
-        [sg.Button('Voltar', size= detalhes['sizeBotão'])]
+        [sg.Button('Voltar', size= detalhes['sizeBotao'])]
     ]
 
     layout_deletar = [
-        [sg.Menu([['Menu', ['Menu Principal', 'Sair']], ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Alterar']], ['Ajuda', ['Sobre...']]], 
-                 key='barra_menu', 
-                 background_color= detalhes['corFundo'], 
-                 text_color= detalhes['corTexto'])
-        ],
+        [sg.Menu([
+            ['Menu', ['Menu Principal', 'Sair']],
+            ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Alterar']],
+            ['Ajuda', ['Conta', 'Sobre...']]
+        ], key='barra_menu', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])],
         [sg.Column(col1_tabela, background_color= detalhes['corFundo']), sg.Column(col2, background_color= detalhes['corFundo'])],
         [sg.Column(col3, background_color= detalhes['corFundo'], justification= 'left')],
     ]

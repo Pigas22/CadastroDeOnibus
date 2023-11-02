@@ -1,4 +1,4 @@
-def Tela_Alterar(matriz, Id_User):
+def Tela_Alterar(matriz):
     import PySimpleGUI as sg
     from interface.Detalhes import detalhes
 
@@ -30,7 +30,7 @@ def Tela_Alterar(matriz, Id_User):
             [sg.Text('  ', background_color= detalhes['corFundo'])],
             
             [sg.Text('Novo Dado:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.Input(key='NOVO_DADO', size=(10, 1))],
-            [sg.Button('Voltar', size= detalhes['sizeBotão']), sg.Button('Confirmar', size= detalhes['sizeBotão'])]
+            [sg.Button('Voltar', size= detalhes['sizeBotao']), sg.Button('Confirmar', size= detalhes['sizeBotao'])]
         ], background_color= detalhes['corFundo'], element_justification='c', title_location='n')]
     ]
   
@@ -38,7 +38,7 @@ def Tela_Alterar(matriz, Id_User):
         [sg.Menu([
             ['Menu', ['Menu Principal', 'Sair']],
             ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Deletar']],
-            ['Ajuda', ['Sobre...']]
+            ['Ajuda', ['Conta', 'Sobre...']]
         ], 
             key='barra_menu', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])
         ],

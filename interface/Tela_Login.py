@@ -18,8 +18,7 @@ def Tela_Login(): # Não terminado
         [sg.Text('| Senha:                                          ', background_color= detalhes['corFundo'])],
         [sg.Input(key='Senha_Login', size=(20, 1), password_char='*'), sg.Button(button_color= detalhes['corFundo'], border_width= 0, image_subsample= 20, image_filename= r'interface/olho aberto.png', key= 'VerSenha')],
         [sg.Text('', background_color= detalhes['corFundo'])],
-        [sg.Button('Voltar', size= detalhes['sizeBotão'], key='VoltarCadastro'), sg.Button('Fazer Login', size= detalhes['sizeBotão'])],
-        # [sg.Text('', background_color= detalhes['corFundo'])]
+        [sg.Button('Voltar', size= detalhes['sizeBotao'], key='VoltarCadastro'), sg.Button('Fazer Login', size= detalhes['sizeBotao'])],
     ]
 
     return sg.Window('Login', layout, background_color= detalhes['corFundo'], element_justification= 'c', size= (295, 345), return_keyboard_events= True, finalize= True)

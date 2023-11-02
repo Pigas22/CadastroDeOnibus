@@ -3,6 +3,5 @@ def Popup_Padrao(titulo, texto):
     from interface.Detalhes import detalhes
 
     sg.theme(detalhes['tema'])
-
     
     return sg.popup(titulo, texto, background_color= detalhes['corFundo'], any_key_closes= True, text_color= 'White', font= f'{detalhes["fonte"]} {detalhes["tamanhoFonte"]}')

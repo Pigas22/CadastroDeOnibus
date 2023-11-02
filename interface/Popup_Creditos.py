@@ -1,4 +1,4 @@
-def Popup_Creditos(): # a ser feito
+def Popup_Creditos():
     from interface.Detalhes import detalhes
     import PySimpleGUI as sg
     
