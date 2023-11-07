@@ -2,11 +2,45 @@ class Matriz():
     def __init__(self):
         self.__matriz = ''
         self.__Id_User = 0
+        self.__contadorAlteracao = 0.1
 
 
     # Puxa o id do usuario
     def setIdUserMatriz(self, Id_User):
         self.__Id_User = Id_User
+
+
+    # Contador de Alterações
+    def setContadorAlteracao(self):
+        try:
+            alteracoes = []
+            alteracao = []
+            with open('backend\BD_Dados\LogDeAlterações.txt', 'r') as arquivoLog:
+                linhas = arquivoLog.readlines()
+                for linha in linhas:
+                    if linha != '/' and linha != '/\n':
+                        alteracao.append(linha)
+                    
+                    else:
+                        alteracoes.append(alteracao)
+                        alteracao = []
+                        continue
+
+                
+                dados = alteracoes[-1]
+                for dado in dados:
+                    if dado == dados[0]:
+                        self.__contadorAlteracao = float(dado.split()[2][0:3]) + 0.1
+                        break
+
+            arquivoLog.close()
+
+
+        except FileNotFoundError:
+            self.__contadorAlteracao = 0.1
+
+    def getContadorAlteracao(self):
+        return self.__contadorAlteracao
 
     
     # Inicializar matriz
@@ -78,7 +112,7 @@ class Matriz():
         else:
             return 'Erro!'
 
-        self.setMatriz(matriz)
+        # self.setMatriz(matriz)
 
 
     # Consulta Específica
@@ -121,7 +155,8 @@ class Matriz():
             if ' ' in linha[2]:
                 linha[2] = '_'.join(linha[2].split())
 
-        with open(f'backend/BD_Dados/Usuario{self.__Id_User}_Dados.txt', 'w') as arquivo:
+
+        with open(f'backend/BD_Dados//Usuario{self.__Id_User}_Dados.txt', 'w') as arquivo:
             for linhas in matriz:
                 for itens in linhas:
                     arquivo.write(f'{itens} ')
@@ -130,3 +165,51 @@ class Matriz():
         arquivo.close()
 
         return 'Informações salvas com sucesso!'
+
+
+    # Log de alterações na matriz
+    def LogMatriz(self, alteracao):
+        import datetime
+
+        
+        arquivoExiste = False
+        with open('backend\BD_Contas\Todas_Contas.txt', 'r') as arquivo_contas:
+            linhas = arquivo_contas.readlines()
+        arquivo_contas.close()
+
+        for conta in linhas:
+            if int(conta[0]) == self.__Id_User:
+                dados = conta.split()
+                break
+
+        nomeUser = dados[1]
+        emailUser = dados[2]
+        data_horario = datetime.datetime.now().strftime('%d/%m/%Y | %H:%M')
+
+        try:
+            arquivoLog = open(f'backend/BD_Dados/LogDeAlterações.txt', 'x+')
+
+        except FileExistsError:
+            arquivoLog = open(f'backend/BD_Dados/LogDeAlterações.txt', 'a')
+            arquivoExiste = True
+
+        finally:
+            if arquivoExiste:
+                arquivoLog.write(f"\n==================== Log {self.__contadorAlteracao:.1f}v ====================")
+
+            else:
+                arquivoLog.write(f"==================== Log {self.__contadorAlteracao:.1f}v ====================")
+
+            arquivoLog.write(f"\nData e Horário: {data_horario}" +
+                             f"\nUsuário: {nomeUser}" +
+                             f"\nContato: {emailUser}" +
+                             "\n" +
+                             "\n- Alteração:" +
+                             f"\n    {alteracao}" + 
+                             "\n" +
+                             "\n/")
+
+            arquivoLog.close()
+
+
+        self.__contadorAlteracao += 0.1

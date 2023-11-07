@@ -13,11 +13,12 @@ from interface.Tela_Alterar import Tela_Alterar
 from interface.Popup_Creditos import Popup_Creditos
 from interface.PopupCreditosImagens import PopupCreditosImagens
 from interface.Popup_Padrao import Popup_Padrao
-from interface.Tela_PerfilUser import Tela_PerfilUser # Vou usar ainda
+from interface.Tela_PerfilUser import Tela_PerfilUser
 from interface.Op_MenuBAR import op_menuBar
 from interface.Detalhes import detalhes
 
 
+# Janelas
 janelaCadastro = Tela_Cadastro()
 janelaLogin = None
 janelaInicial = None
@@ -30,16 +31,19 @@ janelaPerfilUser = None
 popupCreditos = None
 popupPadrao = None
 
+# Parametro para mostrar as Senhas na tela de Login, Cadastro e Perfil
 mostrarLogin = False
 mostrarCadastro = False
 mostrarSenha = False
 
+# Classes
 user = Usuario()
 matriz = Matriz()
 
+# Leitura de janelas e seus valores e eventos
 while True:
     window, evento, valor = sg.read_all_windows()
-    
+
     if window == janelaCadastro:
         validacoes = 0
         
