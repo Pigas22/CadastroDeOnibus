@@ -1,9 +1,10 @@
 ========== Lista de Afazeres no Projeto: ==========
 
 Itens a serem feitos:
-        - Adicionar um log de informações e alterações com data e hora, arquivo separado.
+        - Implementar o Log
 
 Itens Feitos:
+        [Check] - Criar um log de informações e alterações da Matriz com data e hora, em arquivo separado.
         [Check] - Botão para acessar a conta no menu inicial
         [Check] - Tela de Perfil
         [Check] - botão de Logout, na tela de Perfil
