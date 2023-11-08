@@ -29,7 +29,7 @@ def Tela_Alterar(matriz):
 
             [sg.Text('  ', background_color= detalhes['corFundo'])],
             
-            [sg.Text('Novo Dado:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.Input(key='NOVO_DADO', size=(10, 1))],
+            [sg.Text('Novo Dado:', background_color= detalhes['corFundo'], text_color= detalhes['corTexto']), sg.Input(key='NOVO_DADO', size=(15, 1))],
             [sg.Button('Voltar', size= detalhes['sizeBotao']), sg.Button('Confirmar', size= detalhes['sizeBotao'])]
         ], background_color= detalhes['corFundo'], element_justification='c', title_location='n')]
     ]

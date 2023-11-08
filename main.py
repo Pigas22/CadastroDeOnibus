@@ -36,6 +36,10 @@ mostrarLogin = False
 mostrarCadastro = False
 mostrarSenha = False
 
+# Tipo e filtro de dado da Tela alterar, padrao == ID
+tipo = 'ID'
+filtro = 'id'
+
 # Classes
 user = Usuario()
 matriz = Matriz()
@@ -43,6 +47,7 @@ matriz = Matriz()
 # Leitura de janelas e seus valores e eventos
 while True:
     window, evento, valor = sg.read_all_windows()
+    matriz.setContadorAlteracao()
 
     if window == janelaCadastro:
         validacoes = 0
@@ -203,6 +208,7 @@ while True:
             quant_passageiros = valor['N° de PASSAGEIROS']
     
             matriz.Inserir(motorista, linha, destino, quant_passageiros)
+            matriz.Salvar_Matriz()
 
             Popup_Padrao('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".')
 
@@ -230,26 +236,30 @@ while True:
             valor['ID'] = evento[2][0]
 
         elif evento == 'Deletar Dado' or evento == 'Resetar Matriz':
-            if evento == 'Deletar Dado':
-                id_do_registro = int(valor['ID'])
+            try:
+                if evento == 'Deletar Dado':
+                    id_do_registro = int(valor['ID'])
             
-                matriz.Deletar(local_linha= id_do_registro)
+                    matriz.Deletar(local_linha= id_do_registro)
 
-            elif evento == 'Resetar Matriz':
-                matriz.Deletar(resetar= True)
+                elif evento == 'Resetar Matriz':
+                    matriz.Deletar(resetar= True)
 
-            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
-            
-            tabela = janelaDeletar['tabela_atual']
-            tabela.update(values=tabela_comId)
-            
-            Popup_Padrao('Operação bem-sucedida', 'Valor deletado com sucesso!')
-            resp_delete = janelaDeletar['ID']
-            resp_delete.update('')
-    
+                matriz.Salvar_Matriz()
+                tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
+                
+                tabela = janelaDeletar['tabela_atual']
+                tabela.update(values=tabela_comId)
+                
+                Popup_Padrao('Operação bem-sucedida', 'Valor deletado com sucesso!')
+                resp_delete = janelaDeletar['ID']
+                resp_delete.update('')
+
+            except ValueError:
+                Popup_Padrao('ERROR!', 'Nenhum ID informado.')
+
     
     elif window == janelaConsulta:
-        filtro = 'id'
         filtros_Keys = ['FILTRO_ID', 'FILTRO_MOTORISTA', 'FILTRO_LINHA', 'FILTRO_DESTINO', 'FILTRO_PESSOAS']
     
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
@@ -264,50 +274,68 @@ while True:
                 if valor['FILTRO_MOTORISTA'] or valor['FILTRO_DESTINO']:
                     chave_pesquisa = chave_pesquisa.title()
                     
-                matriz_Pesquisa = []
-    
-                if chave_pesquisa.isnumeric():
+                else:
                     chave_pesquisa = int(chave_pesquisa)
+    
+                matriz_Pesquisa = []
                 
                 if filtro == 'id':
-                    try:
-                        matriz_Pesquisa.append(matriz.getMatriz()[int(chave_pesquisa)])
+                    matriz_Pesquisa.append(matriz.getMatriz()[int(chave_pesquisa)])
 
-                    except ValueError:
-                        Popup_Padrao('Error:', 'Informe apenas o ID do Ônibus')
-    
                 else:
                     for linha in matriz.getMatriz():
-                        if linha[filtro] == chave_pesquisa:
-                            matriz_Pesquisa.append(linha)
+                        if filtro == 0 or filtro == 2: # Motorista e Destino
+                            if type(linha[filtro]) == type(chave_pesquisa):
+                                if linha[filtro] == chave_pesquisa:
+                                    matriz_Pesquisa.append(linha)
+
+                            else:
+                                # provocando erro
+                                int('abc')
+
+                        elif filtro == 1 or filtro == 3: # Linha e Quantidade de Pessoas
+                            if int(linha[filtro]) == int(chave_pesquisa):
+                                matriz_Pesquisa.append(linha)
 
                     if len(matriz_Pesquisa) == 0:
-                        Popup_Padrao('Error: ', 'Não possui esse dado no Banco')
-    
+                        # provocando o erro
+                        print(matriz_Pesquisa[99])
+
+                matriz.LogMatriz(f'Operação realizada com sucesso! Dado Consultado: [ {chave_pesquisa} ] do tipo [ {tipo} ]')
+
                 tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz_Pesquisa)]
                 janelaConsulta['tabela'].update(values=tabela_comId)
 
                 janelaConsulta['KEY_PESQUISA'].update('')
-
-
+                
             except IndexError:
-                Popup_Padrao('Error: ', 'Não possui esse dado no Banco')
-        
+                Popup_Padrao('Error: ', 'Não possui esse dado no Banco de Dados')
+                matriz.LogMatriz(f'ERROR: Não possui esse dado no Banco de Dados \nDado consultado: [ {chave_pesquisa} ] do tipo [ {tipo} ]')
+
+            except ValueError:
+                Popup_Padrao('Error:', 'Dado informado não coincide com o filtro selecionado.')
+                matriz.LogMatriz(f'ERROR: Dado informado não coincide com o filtro selecionado. \nDado consultado: [ {chave_pesquisa} ] do tipo [ {tipo} ]')
+
         elif evento in filtros_Keys:
             if valor['FILTRO_ID']:
                 filtro = 'id'
+                tipo = 'ID'
                 
             elif valor['FILTRO_MOTORISTA']:
                 filtro = 0
+                tipo = 'Motorista'
     
             elif valor['FILTRO_LINHA']: 
                 filtro = 1
+                tipo = 'Linha'
                 
             elif valor['FILTRO_DESTINO']: 
                 filtro = 2
+                tipo = 'Destino'
     
             elif valor['FILTRO_PESSOAS']: 
                 filtro = 3
+                tipo = 'Quantidade de pessoas'
 
         elif evento == 'MATRIZ_ORIGINAL':
             tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
@@ -321,7 +349,6 @@ while True:
             PopupCreditosImagens()
             exit()
 
-      
         elif evento[0] == 'tabela':
             tabela = janelaAlterar['ID_linha']
             tabela.update(evento[2][0])
@@ -333,20 +360,36 @@ while True:
             valor['ID_coluna'] = Colunas_Inversa.colunas_inversa[str(evento[2][1])]
       
         elif evento == 'Confirmar':
-            ID_linha = valor['ID_linha']
-            ID_coluna = valor['ID_coluna']
-            new_dado = valor['NOVO_DADO']
-      
-            matriz.Alterar_Dado(ID_linha, ID_coluna, new_dado)
-            matriz.Salvar_Matriz()
-      
-            tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
-            tabela = janelaAlterar['tabela']
-            tabela.update(values=tabela_comId)
-      
-            Popup_Padrao('Operação bem-sucedida', 'Valor alterado com sucesso!')
-            resposta = janelaAlterar['NOVO_DADO']
-            resposta.update('')
+            try:
+                ID_linha = valor['ID_linha']
+                ID_coluna = valor['ID_coluna']
+                new_dado = valor['NOVO_DADO']
+
+                if ID_coluna == 'Linha' or ID_coluna == 'Passageiro':
+                    new_dado = int(valor['NOVO_DADO'])
+
+                else:
+                    if new_dado.isnumeric():
+                        int('abc')
+
+                    else:
+                        new_dado = new_dado.title()
+
+                matriz.Alterar_Dado(ID_linha, ID_coluna, new_dado)
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+        
+                tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
+                tabela = janelaAlterar['tabela']
+                tabela.update(values=tabela_comId)
+        
+                Popup_Padrao('Operação bem-sucedida', 'Valor alterado com sucesso!')
+                resposta = janelaAlterar['NOVO_DADO']
+                resposta.update('')
+
+            except ValueError:
+                Popup_Padrao('Error:', 'Dado informado não coincide com a coluna selecionada.')
+                matriz.LogMatriz(f'ERROR: Dado informado não coincide com a coluna selecionada. \n    - Dado consultado: [ {new_dado} ] \n    - Coluna selecionada: [ {ID_coluna} ]')
 
 
     elif window == janelaPerfilUser:
@@ -474,3 +517,4 @@ while True:
         
         if (evento != 'Sobre...') and (evento not in ['Cadastro', 'VoltarCadastro']) and (evento not in ['Login', 'Login...']):
             matriz.Salvar_Matriz()
+            matriz.Inicializar()

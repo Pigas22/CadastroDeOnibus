@@ -1,9 +1,12 @@
 ========== Lista de Afazeres no Projeto: ==========
 
 Itens a serem feitos:
-        - Implementar o Log
+        - Implementar botão de salvamento e tirar o salvamento automático como padrão
+        - Criar um Log de Cadastros e Logins
+        - Cadastrar Motoristas e destinos
 
 Itens Feitos:
+        [Check] - Implementar o Log nas funções principais
         [Check] - Criar um log de informações e alterações da Matriz com data e hora, em arquivo separado.
         [Check] - Botão para acessar a conta no menu inicial
         [Check] - Tela de Perfil

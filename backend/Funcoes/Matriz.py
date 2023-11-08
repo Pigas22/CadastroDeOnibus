@@ -82,16 +82,17 @@ class Matriz():
 
 
     # Inserir algo à Matriz
-    def Inserir(self, motorista, linha, destino, quant_passageiros):
+    def Inserir(self, motorista, linha, destino, qnt_passageiros):
         matriz = self.getMatriz()
         motorista = motorista.title()
         destino = destino.title()
 
-        linha = [motorista, linha, destino, quant_passageiros]
-        matriz.append(linha)
+        linhaMatriz = [motorista, linha, destino, qnt_passageiros]
+        matriz.append(linhaMatriz)
+        self.LogMatriz(f'Dados adicionados: [ {motorista}, {linha}, {destino}, {qnt_passageiros} ]')
 
         self.setMatriz(matriz)
- 
+
 
     # Deleta uma linha na matriz ou ela inteira
     def Deletar(self, local_linha='', resetar= False):
@@ -100,35 +101,19 @@ class Matriz():
         if resetar:
             for i in range(0, len(matriz)):
                 matriz.pop()
-
-            return 'Todos os dados foram apagados.'
+            
+            self.setMatriz(matriz)
+            self.LogMatriz('Todos os dados foram apagados.')
 
         elif local_linha != '' :
             dado = matriz[local_linha]
             matriz.remove(dado)
 
-            return f'Linha {local_linha + 1} foi apagada com sucesso. [ {dado} ]'
+            self.setMatriz(matriz)
+            self.LogMatriz(f'Linha {local_linha + 1} foi apagada com sucesso. dados apagados: [ {" ".join(dado[0].split("_"))}, {dado[1]}, {" ".join(dado[2].split("_"))}, {dado[3]} ]')
 
         else:
-            return 'Erro!'
-
-        # self.setMatriz(matriz)
-
-
-    # Consulta Específica
-    def Consulta_Espec(self, local_linha=''):
-        matriz = self.getMatriz()
-        try:
-            dados = []
-            tamanho = len(matriz[local_linha])
-            for item in range(0, tamanho):
-                dados.append(matriz[local_linha][item])
-
-        except Exception as ERROR:
-            return f'Erro do tipo: {ERROR.__cause__}'
-
-        else:
-            return dados
+            self.LogMatriz('Erro: não foi possível deletar o dado.')
 
 
     # Alterar dado na Matriz
@@ -136,13 +121,11 @@ class Matriz():
         from backend.Colunas import colunas
 
         matriz = self.getMatriz()
-        local_coluna = colunas[local_coluna]
+        coluna_final = colunas[local_coluna]
     
-        if ' ' in novo_dado:
-            novo_dado = '_'.join(novo_dado.split())
-    
-        matriz[local_linha][local_coluna] = novo_dado
+        matriz[local_linha][coluna_final] = novo_dado
         self.setMatriz(matriz)
+        self.LogMatriz(f'Dados alterados com sucesso! \nDados da alteração: \n    - Linha: {local_linha} \n    - Coluna: {local_coluna} \n    - Novo Dado: {novo_dado}')
 
     
     # Salvar Matriz
@@ -164,7 +147,8 @@ class Matriz():
 
         arquivo.close()
 
-        return 'Informações salvas com sucesso!'
+        # para o prox commit:
+        # self.LogMatriz('Informações salvas com sucesso!')
 
 
     # Log de alterações na matriz
@@ -210,6 +194,5 @@ class Matriz():
                              "\n/")
 
             arquivoLog.close()
-
 
         self.__contadorAlteracao += 0.1

@@ -1,27 +1,672 @@
-================ Log 0.1v ================
-Usuï¿½rio: THiago_Holz_Coutinho
-Horï¿½rio: 21:53
-Contato: teste2@gmail.com
+==================== Log 0.1v ====================
+Data e Horï¿½rio: 06/11/2023 | 23:51
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
 
 - Alteraï¿½ï¿½o:
-    alteraï¿½ï¿½o teste7
+    Dados adicionados: [ Teste2, Domingos Martins, 5022, 452 ]
 
 /
-================ Log 0.2v ================
-Usuï¿½rio: THiago_Holz_Coutinho
-Horï¿½rio: 21:53
-Contato: teste2@gmail.com
+==================== Log 0.2v ====================
+Data e Horï¿½rio: 06/11/2023 | 23:52
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
 
 - Alteraï¿½ï¿½o:
-    alteraï¿½ï¿½o teste8
+    Dados adicionados: [ Teste, Vila Velha, 124, 488 ]
 
 /
-================ Log 0.3v ================
+==================== Log 0.3v ====================
+Data e Horï¿½rio: 06/11/2023 | 23:58
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Linha 2 foi apagada com sucesso. dados apagados: [ ['Teste', 124, 'Vila_Velha', 488] ]
+
+/
+==================== Log 0.4v ====================
+Data e Horï¿½rio: 06/11/2023 | 23:58
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Todos os dados foram apagados.
+
+/
+==================== Log 0.5v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:01
 Usuï¿½rio: THiago_Holz_Coutinho
-Horï¿½rio: 21:53
 Contato: teste2@gmail.com
 
 - Alteraï¿½ï¿½o:
-    alteraï¿½ï¿½o teste9
+    Dados adicionados: [ Teste, Domingos Martins, 524, 24 ]
+
+/
+==================== Log 0.6v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:01
+Usuï¿½rio: THiago_Holz_Coutinho
+Contato: teste2@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Linha 1 foi apagada com sucesso. dados apagados: [ Teste, 524, Domingos_Martins, 24 ]
+
+/
+==================== Log 0.7v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:03
+Usuï¿½rio: THiago_Holz_Coutinho
+Contato: teste2@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Linha 1 foi apagada com sucesso. dados apagados: [ Teste, 524, D o m i n g o s _ M a r t i n s, 24 ]
+
+/
+==================== Log 0.8v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:09
+Usuï¿½rio: THiago_Holz_Coutinho
+Contato: teste2@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Dados adicionados: [ Teste, 16465, Vila Velha, 1545 ]
+
+/
+==================== Log 0.9v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:09
+Usuï¿½rio: THiago_Holz_Coutinho
+Contato: teste2@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Linha 1 foi apagada com sucesso. dados apagados: [ ['Teste'], 16465, ['Vila', 'Velha'], 1545 ]
+
+/
+==================== Log 1.0v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:10
+Usuï¿½rio: THiago_Holz_Coutinho
+Contato: teste2@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Linha 1 foi apagada com sucesso. dados apagados: [ Teste, 16465, Vila Velha, 1545 ]
+
+/
+==================== Log 1.1v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:17
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Dados adicionados: [ Teste1231, 6447, Domingos Martins, 264 ]
+
+/
+==================== Log 1.2v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:26
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR ao consultar o dado. Erro do tipo: None
+
+/
+==================== Log 1.3v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:34
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: 1
+
+/
+==================== Log 1.4v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:40
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ 2 ] do tipo [ ID ]
+
+/
+==================== Log 1.5v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:41
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 488 ] do tipo [ ID ]
+
+/
+==================== Log 1.6v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:43
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 488 ] do tipo [ ID ]
+
+/
+==================== Log 1.7v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:43
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ Teste ] do tipo [ ID ]
+
+/
+==================== Log 1.8v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:50
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 488 ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 1.9v ====================
+Data e Horï¿½rio: 07/11/2023 | 00:52
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 488 ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 2.0v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:33
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR ao consultar o dado. Erro do tipo: None
+
+/
+==================== Log 2.1v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:33
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ 488 ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 2.2v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:34
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado consultado com filtro incorreto. 
+Dado consultado: [ fdg ] do tipo [ ID ]
+
+/
+==================== Log 2.3v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:36
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado consultado com filtro incorreto. 
+Dado consultado: [ uti ] do tipo [ ID ]
+
+/
+==================== Log 2.4v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:36
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ ID ]
+
+/
+==================== Log 2.5v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:42
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado consultado com filtro incorreto. 
+Dado consultado: [ uti ] do tipo [ ID ]
+
+/
+==================== Log 2.6v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:42
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ uti ] do tipo [ ID ]
+
+/
+==================== Log 2.7v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:47
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado consultado com filtro incorreto. 
+Dado consultado: [ uti ] do tipo [ ID ]
+
+/
+==================== Log 2.8v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:47
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 2.9v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:48
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.0v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:52
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.1v ====================
+Data e Horï¿½rio: 07/11/2023 | 20:52
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.2v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:01
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.3v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:01
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.4v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:08
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Tipo do Dado incorreto. 
+Dado consultado: [ uti ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.5v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:22
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ Motorista ]
+
+/
+==================== Log 3.6v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:24
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ Motorista ]
+
+/
+==================== Log 3.7v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:27
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado informado nï¿½o coincide com o filtro selecionado. 
+Dado consultado: [ 123 ] do tipo [ Motorista ]
+
+/
+==================== Log 3.8v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:28
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ Quantidade de pessoas ]
+
+/
+==================== Log 3.9v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:28
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ ID ]
+
+/
+==================== Log 4.0v ====================
+Data e Horï¿½rio: 07/11/2023 | 21:28
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ Linha ]
+
+/
+==================== Log 4.1v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:23
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado informado nï¿½o coincide com o filtro selecionado. 
+Dado consultado: [ abc ] do tipo [ ID ]
+
+/
+==================== Log 4.2v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:23
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado informado nï¿½o coincide com o filtro selecionado. 
+Dado consultado: [ Abc ] do tipo [ Destino ]
+
+/
+==================== Log 4.3v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:25
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado informado nï¿½o coincide com o filtro selecionado. 
+Dado consultado: [ Abc ] do tipo [ Destino ]
+
+/
+==================== Log 4.4v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:30
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ Abc ] do tipo [ Destino ]
+
+/
+==================== Log 4.5v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:31
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Dado informado nï¿½o coincide com o filtro selecionado. 
+Dado consultado: [ abc ] do tipo [ ID ]
+
+/
+==================== Log 4.6v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:31
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ Abc ] do tipo [ Motorista ]
+
+/
+==================== Log 4.7v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:31
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ ID ]
+
+/
+==================== Log 4.8v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:31
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ 123 ] do tipo [ Motorista ]
+
+/
+==================== Log 4.9v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:32
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ Teste2 ] do tipo [ Motorista ]
+
+/
+==================== Log 5.0v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:43
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Dados alterados com sucesso! 
+Dados da alteraï¿½ï¿½o: 
+  - Linha: 1 
+   - Coluna: Destino 
+    - Novo Dado: Domingos_Martins
+
+/
+==================== Log 5.1v ====================
+Data e Horï¿½rio: 07/11/2023 | 22:43
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    ERROR: Nï¿½o possui esse dado no Banco de Dados 
+Dado consultado: [ Domingos Martins ] do tipo [ Destino ]
+
+/
+==================== Log 5.2v ====================
+Data e Horï¿½rio: 07/11/2023 | 23:00
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Operaï¿½ï¿½o realizada com sucesso! Dado Consultado: [ Domingos Martins ] do tipo [ Destino ]
+
+/
+==================== Log 5.3v ====================
+Data e Horï¿½rio: 07/11/2023 | 23:02
+Usuï¿½rio: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteraï¿½ï¿½o:
+    Dados alterados com sucesso! 
+Dados da alteraï¿½ï¿½o: 
+  - Linha: 2 
+   - Coluna: Passageiro 
+    - Novo Dado: 488
+
+/
+==================== Log 5.4v ====================
+Data e Horário: 07/11/2023 | 23:04
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 0 
+    - Coluna: Passageiro 
+    - Novo Dado: 488
+
+/
+==================== Log 5.5v ====================
+Data e Horário: 07/11/2023 | 23:04
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 1 
+    - Coluna: Linha 
+    - Novo Dado: 500
+
+/
+==================== Log 5.6v ====================
+Data e Horário: 07/11/2023 | 23:06
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 0 
+    - Coluna: Destino 
+    - Novo Dado: 529
+
+/
+==================== Log 5.7v ====================
+Data e Horário: 07/11/2023 | 23:07
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 0 
+    - Coluna: Destino 
+    - Novo Dado: DomingosMartins
+
+/
+==================== Log 5.8v ====================
+Data e Horário: 07/11/2023 | 23:07
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 0 
+    - Coluna: Destino 
+    - Novo Dado: Domingos martins
+
+/
+==================== Log 5.9v ====================
+Data e Horário: 07/11/2023 | 23:23
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    ERROR: Dado informado não coincide com a coluna selecionada. 
+    - Dado consultado: [ vbdh ] 
+    - Coluna selecionada: [ Passageiro ]
+
+/
+==================== Log 6.0v ====================
+Data e Horário: 07/11/2023 | 23:25
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 2 
+    - Coluna: Destino 
+    - Novo Dado: 124
+
+/
+==================== Log 6.1v ====================
+Data e Horário: 07/11/2023 | 23:25
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 2 
+    - Coluna: Destino 
+    - Novo Dado: Domingos martins
+
+/
+==================== Log 6.2v ====================
+Data e Horário: 07/11/2023 | 23:28
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    ERROR: Dado informado não coincide com a coluna selecionada. 
+    - Dado consultado: [ 545 ] 
+    - Coluna selecionada: [ Destino ]
+
+/
+==================== Log 6.3v ====================
+Data e Horário: 07/11/2023 | 23:29
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 0 
+    - Coluna: Destino 
+    - Novo Dado: Domingos Martins
+
+/
+==================== Log 6.4v ====================
+Data e Horário: 07/11/2023 | 23:30
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 2 
+    - Coluna: Destino 
+    - Novo Dado: Domingos Martins
+
+/
+==================== Log 6.5v ====================
+Data e Horário: 07/11/2023 | 23:31
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 6.6v ====================
+Data e Horário: 07/11/2023 | 23:31
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
 
 /
