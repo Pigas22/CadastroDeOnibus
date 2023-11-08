@@ -34,7 +34,7 @@ def Tela_Deletar(matriz): # à modificar
 
     layout_deletar = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']],
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']],
             ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Alterar']],
             ['Ajuda', ['Conta', 'Sobre...']]
         ], key='barra_menu', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])],

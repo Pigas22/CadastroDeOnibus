@@ -670,3 +670,485 @@ Contato: teste@gmail.com
     Informações salvas com sucesso!
 
 /
+==================== Log 6.7v ====================
+Data e Horário: 07/11/2023 | 23:59
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    ERROR: Não possui esse dado no Banco de Dados 
+Dado consultado: [ Dfdhd ] do tipo [ Motorista ]
+
+/
+==================== Log 6.8v ====================
+Data e Horário: 08/11/2023 | 00:00
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Linha 1 foi apagada com sucesso. dados apagados: [ Teste2, 5022, Domingos Martins, 488 ]
+
+/
+==================== Log 6.9v ====================
+Data e Horário: 08/11/2023 | 00:05
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Operação realizada com sucesso! Dado Consultado: [ Teste ] do tipo [ Motorista ]
+
+/
+==================== Log 7.0v ====================
+Data e Horário: 08/11/2023 | 00:06
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados adicionados: [ Teste, 64, Vv, 354 ]
+
+/
+==================== Log 7.1v ====================
+Data e Horário: 08/11/2023 | 00:08
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.2v ====================
+Data e Horário: 08/11/2023 | 00:08
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.3v ====================
+Data e Horário: 08/11/2023 | 00:08
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.4v ====================
+Data e Horário: 08/11/2023 | 00:09
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.5v ====================
+Data e Horário: 08/11/2023 | 00:09
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.6v ====================
+Data e Horário: 08/11/2023 | 00:09
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.7v ====================
+Data e Horário: 08/11/2023 | 00:09
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.8v ====================
+Data e Horário: 08/11/2023 | 00:11
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 7.9v ====================
+Data e Horário: 08/11/2023 | 00:11
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.0v ====================
+Data e Horário: 08/11/2023 | 00:11
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.1v ====================
+Data e Horário: 08/11/2023 | 00:11
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.2v ====================
+Data e Horário: 08/11/2023 | 00:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados adicionados: [ Teste, 4977, Dm, 24 ]
+
+/
+==================== Log 8.3v ====================
+Data e Horário: 08/11/2023 | 00:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.4v ====================
+Data e Horário: 08/11/2023 | 00:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.5v ====================
+Data e Horário: 08/11/2023 | 13:01
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Linha 3 foi apagada com sucesso. dados apagados: [ Teste, 64, Vv, 354 ]
+
+/
+==================== Log 8.6v ====================
+Data e Horário: 08/11/2023 | 13:01
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados alterados com sucesso! 
+Dados da alteração: 
+    - Linha: 1 
+    - Coluna: Linha 
+    - Novo Dado: 850
+
+/
+==================== Log 8.7v ====================
+Data e Horário: 08/11/2023 | 13:02
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.8v ====================
+Data e Horário: 08/11/2023 | 13:02
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 8.9v ====================
+Data e Horário: 08/11/2023 | 13:10
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.0v ====================
+Data e Horário: 08/11/2023 | 13:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Dados adicionados: [ Testealteracao, 14564, Dm, 4 ]
+
+/
+==================== Log 9.1v ====================
+Data e Horário: 08/11/2023 | 13:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.2v ====================
+Data e Horário: 08/11/2023 | 13:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.3v ====================
+Data e Horário: 08/11/2023 | 13:16
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.4v ====================
+Data e Horário: 08/11/2023 | 13:22
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.5v ====================
+Data e Horário: 08/11/2023 | 13:23
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.6v ====================
+Data e Horário: 08/11/2023 | 13:23
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.7v ====================
+Data e Horário: 08/11/2023 | 14:22
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.8v ====================
+Data e Horário: 08/11/2023 | 14:27
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 9.9v ====================
+Data e Horário: 08/11/2023 | 14:32
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.0v ====================
+Data e Horário: 08/11/2023 | 14:34
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 14:38
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 14:38
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 14:41
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:02
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:02
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:12
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:16
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:17
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:17
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:19
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:21
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:22
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:23
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:23
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:24
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:27
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:27
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:38
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/
+==================== Log 10.1v ====================
+Data e Horário: 08/11/2023 | 15:43
+Usuário: Thiago_Teste2
+Contato: teste@gmail.com
+
+- Alteração:
+    Informações salvas com sucesso!
+
+/

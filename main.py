@@ -13,6 +13,7 @@ from interface.Tela_Alterar import Tela_Alterar
 from interface.Popup_Creditos import Popup_Creditos
 from interface.PopupCreditosImagens import PopupCreditosImagens
 from interface.Popup_Padrao import Popup_Padrao
+from interface.Popup_Save import Popup_Save
 from interface.Tela_PerfilUser import Tela_PerfilUser
 from interface.Op_MenuBAR import op_menuBar
 from interface.Detalhes import detalhes
@@ -28,8 +29,9 @@ janelaDeletar = None
 janelaConsulta = None
 janelaAlterar = None
 janelaPerfilUser = None
-popupCreditos = None
-popupPadrao = None
+
+# Parametro para salvar automaticamente as alterações
+auto_Save = False
 
 # Parametro para mostrar as Senhas na tela de Login, Cadastro e Perfil
 mostrarLogin = False
@@ -190,6 +192,11 @@ while True:
     
     elif window == janelaInicial:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+            salvar = Popup_Save()
+            if salvar == 'Yes':
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+
             janelaInicial.close()
             PopupCreditosImagens()
             exit()
@@ -197,6 +204,11 @@ while True:
 
     elif window == janelaInserir:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+            salvar = Popup_Save()
+            if salvar == 'Yes':
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+
             janelaInserir.close()
             PopupCreditosImagens()
             exit()
@@ -208,8 +220,6 @@ while True:
             quant_passageiros = valor['N° de PASSAGEIROS']
     
             matriz.Inserir(motorista, linha, destino, quant_passageiros)
-            matriz.Salvar_Matriz()
-
             Popup_Padrao('Viagem adicionada com sucesso!', 'Confira a nova adição na tela "Ver Tudo".')
 
             lacunas = [janelaInserir['motorista'], janelaInserir['linha'], janelaInserir['destino'], janelaInserir['N° de PASSAGEIROS']]
@@ -226,6 +236,11 @@ while True:
 
     elif window == janelaDeletar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+            salvar = Popup_Save()
+            if salvar == 'Yes':
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+
             janelaDeletar.close()
             PopupCreditosImagens()
             exit()
@@ -245,7 +260,6 @@ while True:
                 elif evento == 'Resetar Matriz':
                     matriz.Deletar(resetar= True)
 
-                matriz.Salvar_Matriz()
                 tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
                 
                 tabela = janelaDeletar['tabela_atual']
@@ -345,6 +359,11 @@ while True:
     
     elif window == janelaAlterar:
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
+            salvar = Popup_Save()
+            if salvar == 'Yes':
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+
             janelaAlterar.close()
             PopupCreditosImagens()
             exit()
@@ -376,8 +395,6 @@ while True:
                         new_dado = new_dado.title()
 
                 matriz.Alterar_Dado(ID_linha, ID_coluna, new_dado)
-                matriz.Salvar_Matriz()
-                matriz.Inicializar()
         
                 tabela_comId = [[i] + sublist for i, sublist in enumerate(matriz.getMatriz())]
                 tabela = janelaAlterar['tabela']
@@ -392,129 +409,142 @@ while True:
                 matriz.LogMatriz(f'ERROR: Dado informado não coincide com a coluna selecionada. \n    - Dado consultado: [ {new_dado} ] \n    - Coluna selecionada: [ {ID_coluna} ]')
 
 
-    elif window == janelaPerfilUser:
+    elif window == janelaPerfilUser:   
+        if evento == '__ATIVAR__':
+            auto_Save = True
+            janelaPerfilUser['__ESTADO__'].update('ON ', text_color='green')
+
+        elif evento == '__DESATIVAR__':
+            auto_Save = False
+            janelaPerfilUser['__ESTADO__'].update('OFF', text_color='red')
+        
+
         if evento == sg.WINDOW_CLOSED or evento == 'Sair':
             janelaPerfilUser.close()
             PopupCreditosImagens()
             exit()
 
-        elif evento != sg.WINDOW_CLOSED and evento != 'Sair':
-            if evento == '__EditarNome__':
-                novo_nome = sg.popup_get_text('Informe o novo Nome do Usuário: ', background_color= detalhes['corFundo'])
 
-                if novo_nome != None:
-                    user.setNomeUser(novo_nome)
-                    janelaPerfilUser['__NOME__'].update(novo_nome)
-                    user.salvarConta(atualizar_nome= True)
+        elif evento == '__EditarNome__':
+            novo_nome = sg.popup_get_text('Informe o novo Nome do Usuário: ', background_color= detalhes['corFundo'])
 
-                    Popup_Padrao('Parabéns dado alterado com sucesso!', 'O Nome da conta foi alterada com sucesso.')
+            if novo_nome != None:
+                user.setNomeUser(novo_nome)
+                janelaPerfilUser['__NOME__'].update(novo_nome)
+                user.salvarConta(atualizar_nome= True)
+
+                Popup_Padrao('Parabéns dado alterado com sucesso!', 'O Nome da conta foi alterada com sucesso.')
+
+            else:
+                Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira algum nome válido.')
+
+
+        elif evento == '__EditarEmail__':
+            novo_email = sg.popup_get_text('Informe o novo Email do Usuário: ', background_color= detalhes['corFundo'])
+            if novo_email != None:
+                user.verificarEmail(atualizar_dado= True, novo_email= novo_email)
+
+                email_Valido = user.getEmailVerificado()
+                if email_Valido:
+                    user.setEmailUser(novo_email)
+                    janelaPerfilUser['__EMAIL__'].update(novo_email)
+                    user.salvarConta(atualizar_email= True)
+
+                    Popup_Padrao('Parabéns dado alterado com sucesso!', 'O Email da conta foi alterada com sucesso.')
 
                 else:
-                    Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira algum nome válido.')
+                    Popup_Padrao('Error: Email informado já existe', 'Por favor, insira outro email.')
+            
+            else:
+                Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira algum email válido.')
+            
 
+        elif evento == '__EditarSenha__':
+            nova_senha = sg.popup_get_text('Informe a nova Senha do Usuário: ', background_color= detalhes['corFundo'], password_char= '*')
+            if nova_senha != None:
+                user.verificarSenha(atualizar_dado= True, nova_senha= nova_senha)
 
-            elif evento == '__EditarEmail__':
-                novo_email = sg.popup_get_text('Informe o novo Email do Usuário: ', background_color= detalhes['corFundo'])
-                if novo_email != None:
-                    user.verificarEmail(atualizar_dado= True, novo_email= novo_email)
+                senha_Valida = user.getSenhaVerificada()
+                print(senha_Valida)
+                if senha_Valida:
+                    user.setSenha1User(nova_senha)
 
-                    email_Valido = user.getEmailVerificado()
-                    if email_Valido:
-                        user.setEmailUser(novo_email)
-                        janelaPerfilUser['__EMAIL__'].update(novo_email)
-                        user.salvarConta(atualizar_email= True)
+                    if mostrarSenha:
+                        user.setSenhaDesencripatada()
+                        senha_secreta = user.getSenhaDesencriptada()
 
-                        Popup_Padrao('Parabéns dado alterado com sucesso!', 'O Email da conta foi alterada com sucesso.')
-
-                    else:
-                        Popup_Padrao('Error: Email informado já existe', 'Por favor, insira outro email.')
-                
-                else:
-                    Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira algum email válido.')
-                
-
-            elif evento == '__EditarSenha__':
-                nova_senha = sg.popup_get_text('Informe a nova Senha do Usuário: ', background_color= detalhes['corFundo'], password_char= '*')
-                if nova_senha != None:
-                    user.verificarSenha(atualizar_dado= True, nova_senha= nova_senha)
-
-                    senha_Valida = user.getSenhaVerificada()
-                    print(senha_Valida)
-                    if senha_Valida:
-                        user.setSenha1User(nova_senha)
-
-                        if mostrarSenha:
-                            user.setSenhaDesencripatada()
-                            senha_secreta = user.getSenhaDesencriptada()
-
-                        elif not mostrarSenha:
-                            senha_secreta = len(nova_senha) * '*'
-                        
-                        janelaPerfilUser['__SENHA__'].update(senha_secreta)
-                        user.salvarConta(atualizar_senha= True)
-
-                        Popup_Padrao('Parabéns dado alterado com sucesso!', 'A Senha da conta foi alterada com sucesso.')
-
-                    else:
-                        Popup_Padrao('Error: Senha informada é Inválida', 'Por favor, insira alguma senha válida.')
+                    elif not mostrarSenha:
+                        senha_secreta = len(nova_senha) * '*'
                     
+                    janelaPerfilUser['__SENHA__'].update(senha_secreta)
+                    user.salvarConta(atualizar_senha= True)
+
+                    Popup_Padrao('Parabéns dado alterado com sucesso!', 'A Senha da conta foi alterada com sucesso.')
+
                 else:
-                    Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira alguma senha válida.')
-
-
-            elif evento == '__VerSenha__':
-                user.setSenhaDesencripatada()
-                senha_Desencriptada = user.getSenhaDesencriptada()
+                    Popup_Padrao('Error: Senha informada é Inválida', 'Por favor, insira alguma senha válida.')
                 
-                if mostrarSenha:
-                    mostrarSenha = False
-                    janelaPerfilUser['__VerSenha__'].update(image_filename= r'interface/olho aberto.png', image_subsample= 20)
-                    janelaPerfilUser['__SENHA__'].update(len(senha_Desencriptada) * '*')    
-                
-                elif not mostrarSenha:
-                    mostrarSenha = True
-                    janelaPerfilUser['__VerSenha__'].update(image_filename= r'interface/olho fechado.png', image_subsample= 20)
-                    janelaPerfilUser['__SENHA__'].update(senha_Desencriptada)
+            else:
+                Popup_Padrao('Error: Nenhum dado informado', 'Por favor, insira alguma senha válida.')
 
 
-            elif evento == 'Logout':
-                user.__init__()
-                
-    
+        elif evento == '__VerSenha__':
+            user.setSenhaDesencripatada()
+            senha_Desencriptada = user.getSenhaDesencriptada()
+            
+            if mostrarSenha:
+                mostrarSenha = False
+                janelaPerfilUser['__VerSenha__'].update(image_filename= r'interface/olho aberto.png', image_subsample= 20)
+                janelaPerfilUser['__SENHA__'].update(len(senha_Desencriptada) * '*')    
+            
+            elif not mostrarSenha:
+                mostrarSenha = True
+                janelaPerfilUser['__VerSenha__'].update(image_filename= r'interface/olho fechado.png', image_subsample= 20)
+                janelaPerfilUser['__SENHA__'].update(senha_Desencriptada)
+
+
+        elif evento == 'Logout':
+            user.__init__()
+
+                  
     if evento in op_menuBar:
-        if evento != 'Sair' and evento != 'Sobre...':
+        if evento not in ['Sair', 'Sobre...', 'Salvar']:
             window.close()
         
-        if evento == 'Menu Principal' or evento == 'Voltar':
+        if evento in ['Menu Principal', 'Voltar', 'VoltarMenu']:
+            if auto_Save and evento != 'VoltarMenu':
+                matriz.Salvar_Matriz()
+                matriz.Inicializar()
+
             janelaInicial = Tela_Inicial()
 
-        elif evento == 'Cadastro' or evento == 'VoltarCadastro' or evento == 'Logout':
+        elif evento in ['Cadastro', 'VoltarCadastro', 'Logout']:
             janelaCadastro = Tela_Cadastro()
 
-        elif evento == 'Login' or evento == 'Login...':
+        elif evento in ['Login', 'Login...']:
             janelaLogin = Tela_Login()
 
-        elif evento == 'Conta' or evento == '__Conta__':
-            janelaPerfilUser = Tela_PerfilUser(Id_User)
+        elif evento in ['Conta', '__Conta__']:
+            janelaPerfilUser = Tela_PerfilUser(Id_User, auto_Save)
 
-        elif evento == 'Inserir' or evento == 'INSERIR':
+        elif evento in ['Inserir', 'INSERIR']:
             janelaInserir = Tela_Inserir()
         
-        elif evento == 'Ver Tudo' or evento == 'VER TUDO':
+        elif evento in ['Ver Tudo', 'VER TUDO']:
             janelaVerTudo = Tela_VerTudo(matriz.getMatriz(), Id_User)
 
-        elif evento == 'Deletar' or evento == 'DELETAR':
+        elif evento in ['Deletar', 'DELETAR']:
             janelaDeletar = Tela_Deletar(matriz.getMatriz())
 
-        elif evento == 'Consulta Específica' or evento == 'CONSULTA ESPECÍFICA':
+        elif evento in ['Consulta Específica', 'CONSULTA ESPECÍFICA']:
             janelaConsulta = Tela_Consulta(matriz.getMatriz())
             
-        elif evento == 'Alterar' or evento == 'ALTERAR':
+        elif evento in ['Alterar', 'ALTERAR']:
             janelaAlterar = Tela_Alterar(matriz.getMatriz())
 
         elif evento == 'Sobre...':
             Popup_Creditos()
-        
-        if (evento != 'Sobre...') and (evento not in ['Cadastro', 'VoltarCadastro']) and (evento not in ['Login', 'Login...']):
+
+        elif evento == 'Salvar':
             matriz.Salvar_Matriz()
             matriz.Inicializar()

@@ -40,7 +40,7 @@ def Tela_Consulta(matriz): # Ainda à modificar
   
     layout_consulta = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']],
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']],
             ['Navegar', ['Inserir', 'Ver Tudo', 'Alterar', 'Deletar']],
             ['Ajuda', ['Conta', 'Sobre...']]
         ], key='barra_menu', background_color= detalhes['corFundo'], text_color='Black')],   

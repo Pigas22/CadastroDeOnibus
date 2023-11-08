@@ -18,7 +18,7 @@ def Tela_Inicial():
 
     layout = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']], 
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']], 
             ['Ajuda', ['Conta', 'Sobre...']]
             ], key='barra_menu', background_color= detalhes['corFundo'], text_color='Black')],
         [sg.Column(col2, background_color= detalhes['corFundo'], element_justification= 'r'), sg.Column(col1, background_color= detalhes['corFundo'], element_justification= 'r')],

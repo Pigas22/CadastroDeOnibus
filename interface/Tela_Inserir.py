@@ -7,7 +7,7 @@ def Tela_Inserir():
     
     layout_inserir = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']], 
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']], 
             ['Navegar', ['Consulta Específica', 'Ver Tudo', 'Alterar', 'Deletar']], 
             ['Ajuda', ['Conta', 'Sobre...']]
             ], key= 'barra_menu', background_color= detalhes['corFundo'], text_color= detalhes['corTexto'])],

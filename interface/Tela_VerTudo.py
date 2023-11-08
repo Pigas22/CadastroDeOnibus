@@ -11,7 +11,7 @@ def Tela_VerTudo(matriz, Id_User):
     
     layout_verTudo = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']], 
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']], 
             ['Navegar', ['Inserir', 'Consulta Específica', 'Alterar', 'Deletar']], 
             ['Ajuda', ['Sobre...']]
             ], key='barra_menu', background_color=  detalhes['corFundo'], text_color= detalhes['corTexto'])],

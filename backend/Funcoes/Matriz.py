@@ -146,9 +146,8 @@ class Matriz():
                 arquivo.write('\n')
 
         arquivo.close()
-
-        # para o prox commit:
-        # self.LogMatriz('Informações salvas com sucesso!')
+  
+        self.LogMatriz('Informações salvas com sucesso!')
 
 
     # Log de alterações na matriz

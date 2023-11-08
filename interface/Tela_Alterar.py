@@ -36,7 +36,7 @@ def Tela_Alterar(matriz):
   
     layout_alterar = [
         [sg.Menu([
-            ['Menu', ['Menu Principal', 'Sair']],
+            ['Menu', ['Menu Principal', 'Salvar', 'Sair']],
             ['Navegar', ['Inserir', 'Ver Tudo', 'Consulta Específica', 'Deletar']],
             ['Ajuda', ['Conta', 'Sobre...']]
         ], 
